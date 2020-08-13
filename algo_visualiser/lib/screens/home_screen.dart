@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:algo_visualizer/config/palette.dart';
 import 'package:flutter/material.dart';
 
@@ -10,31 +12,57 @@ class _HomeScreenState extends State<HomeScreen> {
   List<int> _array = [];
   double _sizeOfArray = 100;
 
+  _shuffle() {
+    _array = [];
+    for (int each = 0; each < _sizeOfArray; each++) {
+      _array.add(Random().nextInt(_sizeOfArray.round()));
+    }
+
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.fromLTRB(200, 0, 0, 20),
-            child: SizedBox(
-              width: 300.0,
-              child: Slider(
-                value: _sizeOfArray,
-                min: 100,
-                max: 500,
-                divisions: 3,
-                inactiveColor: Palette.textColor,
-                activeColor: Palette.theButton,
-                label: "Set Size Of Array To: ${_sizeOfArray.round()}",
-                onChanged: (double value) {
-                  setState(() {
-                    _sizeOfArray = value;
-                  });
-                },
+          
+        ];
+          Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+              Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Container(
+                      child: IconButton(
+                        icon: Icon(
+                          Icons.shuffle,
+                        ),
+                        iconSize: 30.0,
+                        color: Palette.textColor,
+                        onPressed: () {},
+                      ),
+                    ),
+                    Slider(
+                      value: _sizeOfArray,
+                      min: 100,
+                      max: 500,
+                      divisions: 3,
+                      inactiveColor: Palette.textColor,
+                      activeColor: Palette.theButton,
+                      label: "Set Size Of Array To: ${_sizeOfArray.round()}",
+                      onChanged: (double value) {
+                        setState(() {
+                          _sizeOfArray = value;
+                        });
+                      },
+                    ),
+                  ],
+                ),
               ),
-            ),
+            ],
           ),
         ],
       ),
