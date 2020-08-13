@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:algo_visualizer/config/numbers.dart';
 import 'package:algo_visualizer/config/palette.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +11,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<int> _array = [];
-  double _sizeOfArray = 100;
+  double _sizeOfArray = 500;
 
   _shuffle() {
     _array = [];
@@ -22,47 +23,62 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    _shuffle();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    int counter = 0;
     return Scaffold(
       body: Column(
         children: <Widget>[
-          
-        ];
-          Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: <Widget>[
-              Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Container(
-                      child: IconButton(
-                        icon: Icon(
-                          Icons.shuffle,
-                        ),
-                        iconSize: 30.0,
-                        color: Palette.textColor,
-                        onPressed: () {},
-                      ),
+          Container(
+            height: 0,
+            child: Row(
+              children: _array.map((int item) {
+                counter++;
+                return CustomPaint(
+                  painter: NumberViewer(
+                    barWidth: 2.0,
+                    elementValue: item,
+                    elementIndex: counter,
+                  ),
+                );
+              }).toList(),
+            ),
+          ),
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Container(
+                  child: IconButton(
+                    icon: Icon(
+                      Icons.shuffle,
                     ),
-                    Slider(
-                      value: _sizeOfArray,
-                      min: 100,
-                      max: 500,
-                      divisions: 3,
-                      inactiveColor: Palette.textColor,
-                      activeColor: Palette.theButton,
-                      label: "Set Size Of Array To: ${_sizeOfArray.round()}",
-                      onChanged: (double value) {
-                        setState(() {
-                          _sizeOfArray = value;
-                        });
-                      },
-                    ),
-                  ],
+                    iconSize: 30.0,
+                    color: Palette.textColor,
+                    onPressed: _shuffle,
+                  ),
                 ),
-              ),
-            ],
+                Slider(
+                  value: _sizeOfArray,
+                  min: 100,
+                  max: 500,
+                  divisions: 3,
+                  inactiveColor: Palette.textColor,
+                  activeColor: Palette.theButton,
+                  label: "Set Size Of Array To: ${_sizeOfArray.round()}",
+                  onChanged: (double value) {
+                    setState(() {
+                      _sizeOfArray = value;
+                    });
+                  },
+                ),
+              ],
+            ),
           ),
         ],
       ),

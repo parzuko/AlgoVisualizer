@@ -6,7 +6,7 @@ class NumberViewer extends CustomPainter {
   final int elementValue;
   final int elementIndex;
 
-  NumberViewer(this.barWidth, this.elementValue, this.elementIndex);
+  NumberViewer({this.barWidth, this.elementValue, this.elementIndex});
   @override
   void paint(Canvas canvas, Size size) {
     Paint paint = Paint();
@@ -15,7 +15,7 @@ class NumberViewer extends CustomPainter {
     paint.strokeCap = StrokeCap.butt;
     canvas.drawLine(
         Offset(elementIndex * barWidth, elementValue.ceilToDouble()),
-        Offset(elementIndex * barWidth, 500),
+        Offset(elementIndex * barWidth, 0),
         paint);
   }
 
