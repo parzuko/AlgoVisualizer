@@ -15,7 +15,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   _shuffle() {
     _array = [];
-    for (int each = 0; each < _sizeOfArray; each++) {
+    for (int each = 0; each < 500; each++) {
       _array.add(Random().nextInt(_sizeOfArray.round()));
     }
 
@@ -39,15 +39,20 @@ class _HomeScreenState extends State<HomeScreen> {
               counter++;
               return CustomPaint(
                 painter: NumberViewer(
-                  barWidth: 2.0,
+                  // barWidth: 2.0,
+                  barWidth: MediaQuery.of(context).size.width / _sizeOfArray,
                   elementValue: item,
                   elementIndex: counter,
+                  maxVal: _sizeOfArray.round(),
                 ),
               );
             }).toList(),
           ),
+          SizedBox(
+            height: 550.0,
+          ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
                 child: IconButton(
@@ -61,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               Slider(
                 value: _sizeOfArray,
-                min: 100,
+                min: 10,
                 max: 500,
                 divisions: 3,
                 inactiveColor: Palette.textColor,
