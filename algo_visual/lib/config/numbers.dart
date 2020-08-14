@@ -36,13 +36,13 @@ class NumberViewer extends CustomPainter {
   }
 
   Color insertionPalette(int value) {
-    if (this.elementValue < 500 * .20) {
+    if (this.elementValue < maxVal * .20) {
       return Palette.insertion_1;
-    } else if (this.elementValue < 500 * .40) {
+    } else if (this.elementValue < maxVal * .40) {
       return Palette.insertion_2;
-    } else if (this.elementValue < 500 * .60) {
+    } else if (this.elementValue < maxVal * .60) {
       return Palette.insertion_3;
-    } else if (this.elementValue < 500 * .80) {
+    } else if (this.elementValue < maxVal * .80) {
       return Palette.insertion_4;
     } else {
       return Palette.insertion_5;

@@ -66,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               Slider(
                 value: _sizeOfArray,
-                min: 10,
+                min: 150,
                 max: 500,
                 divisions: 3,
                 inactiveColor: Palette.textColor,
@@ -75,7 +75,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 onChanged: (double value) {
                   setState(() {
                     _sizeOfArray = value;
+                    _shuffle();
                   });
+                  //_sizeOfArray = value;
                 },
               ),
             ],
