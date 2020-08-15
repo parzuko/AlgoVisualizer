@@ -13,7 +13,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<int> _array = [];
-  double _sizeOfArray = 500;
+  double _sizeOfArray = 100;
 
   StreamController<List<int>> _streamController;
   Stream<List<int>> _stream;
@@ -53,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   _shuffle() {
     _array = [];
-    for (int each = 0; each < 500; each++) {
+    for (int each = 0; each < _sizeOfArray; each++) {
       _array.add(Random().nextInt(_sizeOfArray.round()));
     }
 

@@ -13,6 +13,15 @@ class NumberViewer extends CustomPainter {
     this.elementIndex,
     this.maxVal,
   });
+
+  final multiplyer = {
+    500: 1,
+    400: 1,
+    300: .99,
+    200: .99,
+    100: 2,
+  };
+
   @override
   void paint(Canvas canvas, Size size) {
     Paint paint = Paint();
@@ -25,7 +34,8 @@ class NumberViewer extends CustomPainter {
     // }
 
     canvas.drawLine(
-        Offset(elementIndex * barWidth, elementValue.ceilToDouble()),
+        Offset(elementIndex * barWidth,
+            elementValue.ceilToDouble() * multiplyer[maxVal]),
         Offset(elementIndex * barWidth, 0),
         paint);
   }
