@@ -12,4 +12,13 @@ class Palette {
   static const Color insertion_3 = Color(0xffEFCA58);
   static const Color insertion_4 = Color(0xff46B29E);
   static const Color insertion_5 = Color(0xff334E5C);
+
+  //Blue Color Scheme
+  static const Color blue_0 = Color(0xffC3EBEF);
+  static const Color blue_1 = Color(0xff9EDFE5);
+  static const Color blue_2 = Color(0xff70C2DF);
+  static const Color blue_3 = Color(0xff77ADE6);
+  static const Color blue_4 = Color(0xff7D99ED);
+  static const Color blue_5 = Color(0xff7E84F3);
+  static const Color blue_6 = Color(0xff7E6CFB);
 }
