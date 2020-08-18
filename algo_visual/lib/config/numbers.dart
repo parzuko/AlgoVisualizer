@@ -6,7 +6,8 @@ class NumberViewer extends CustomPainter {
   int elementValue;
   final int elementIndex;
   final int maxVal;
-  int whichColor;
+  final int whichColor;
+  final int whichMode;
 
   NumberViewer({
     this.barWidth,
@@ -14,6 +15,7 @@ class NumberViewer extends CustomPainter {
     this.elementIndex,
     this.maxVal,
     this.whichColor,
+    this.whichMode,
   });
 
   final multiplyer = {
@@ -29,18 +31,26 @@ class NumberViewer extends CustomPainter {
     Paint paint = Paint();
     paint.strokeWidth = barWidth;
     paint.strokeCap = StrokeCap.butt;
-    var map = {
+    var themes = {
       1: bluePalette(elementValue),
       2: insertionPalette(elementValue),
     };
-    paint.color = map[whichColor];
-    // if (this.maxVal < 250) {
-    //   this.elementValue += 10;
-    // }
+    paint.color = themes[whichColor];
+    final modes = {
+      1: {
+        1: elementValue.ceilToDouble() * multiplyer[maxVal],
+        2: 1.0,
+      }, //Normal Mode
+
+      2: {
+        1: 3000.0,
+        2: 20.0,
+      }, //Frenzy Mode
+    };
 
     canvas.drawLine(
-        Offset(elementIndex * barWidth,
-            elementValue.ceilToDouble() * multiplyer[maxVal]),
+        Offset(
+            elementIndex * barWidth * modes[whichMode][2], modes[whichMode][1]),
         Offset(elementIndex * barWidth, 0),
         paint);
   }
@@ -52,15 +62,15 @@ class NumberViewer extends CustomPainter {
 
   Color insertionPalette(int value) {
     if (this.elementValue < maxVal * .20) {
-      return Palette.insertion_1;
+      return Palette.vibrant_1;
     } else if (this.elementValue < maxVal * .40) {
-      return Palette.insertion_2;
+      return Palette.vibrant_2;
     } else if (this.elementValue < maxVal * .60) {
-      return Palette.insertion_3;
+      return Palette.vibrant_3;
     } else if (this.elementValue < maxVal * .80) {
-      return Palette.insertion_4;
+      return Palette.vibrant_4;
     } else {
-      return Palette.insertion_5;
+      return Palette.vibrant_5;
     }
   }
 
