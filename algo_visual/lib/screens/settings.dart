@@ -13,8 +13,31 @@ class SettingsDialog extends StatefulWidget {
 }
 
 class _SettingsDialogState extends State<SettingsDialog> {
+  double _sizeOfArray;
+  double _sortingSpeed;
+
+  @override
+  void initState() {
+    super.initState();
+    _sizeOfArray = widget.sizeOfArray;
+    _sortingSpeed = widget.sortingSpeed;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return AlertDialog(
+      title: Center(
+        child: Text(
+          "SETTINGS",
+          style: TextStyle(
+            color: Palette.brightText,
+            fontSize: 20.0,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'Segoe UI',
+            letterSpacing: 1.0,
+          ),
+        ),
+      ),
+    );
   }
 }
