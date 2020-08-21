@@ -40,18 +40,26 @@ class NumberViewer extends CustomPainter {
       1: {
         1: elementValue.ceilToDouble() * multiplyer[maxVal],
         2: 1.0,
+        3: 0.0,
       }, //Normal Mode
 
       2: {
         1: 3000.0,
         2: 20.0,
+        3: 0.0,
       }, //Frenzy Mode
+
+      3: {
+        1: elementValue.ceilToDouble() * multiplyer[maxVal],
+        2: 1.0,
+        3: 500.0,
+      },
     };
 
     canvas.drawLine(
         Offset(
             elementIndex * barWidth * modes[whichMode][2], modes[whichMode][1]),
-        Offset(elementIndex * barWidth, 0),
+        Offset(elementIndex * barWidth, modes[whichMode][3]),
         paint);
   }
 
