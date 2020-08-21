@@ -53,6 +53,7 @@ class NumberViewer extends CustomPainter {
         1: elementValue.ceilToDouble() * multiplyer[maxVal],
         2: 1.0,
         3: 500.0,
+        //Upside Down Mode
       },
     };
 
