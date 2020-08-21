@@ -33,7 +33,7 @@ class NumberViewer extends CustomPainter {
     paint.strokeCap = StrokeCap.butt;
     var themes = {
       1: bluePalette(elementValue),
-      2: insertionPalette(elementValue),
+      2: vibrantPalette(elementValue),
     };
     paint.color = themes[whichColor];
     final modes = {
@@ -60,7 +60,7 @@ class NumberViewer extends CustomPainter {
     return true;
   }
 
-  Color insertionPalette(int value) {
+  Color vibrantPalette(int value) {
     if (this.elementValue < maxVal * .20) {
       return Palette.vibrant_1;
     } else if (this.elementValue < maxVal * .40) {
