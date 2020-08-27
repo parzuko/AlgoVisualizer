@@ -13,11 +13,12 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<int> _array = [];
-  double _sizeOfArray = 100;
+  double _sizeOfArray = 500;
 
   StreamController<List<int>> _streamController;
   Stream<List<int>> _stream;
 
+  // Selection Sort
   selection() async {
     for (int i = 0; i < _array.length - 1; i++) {
       int minIdx = i;
@@ -36,6 +37,37 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  // Partition Method For Quick Sort
+  int partition(List arr, int low, int high) {
+    int pivot = arr[high];
+    int i = (low - 1);
+    for (int j = low; j < high; j++) {
+      if (arr[j] < pivot) {
+        i++;
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+      }
+    }
+    int temp = arr[i + 1];
+    arr[i + 1] = arr[high];
+    arr[high] = temp;
+
+    return i + 1;
+  }
+
+  // Quick Sort
+  quickSort(List arr, int low, int high) async {
+    if (low < high) {
+      int pi = partition(arr, low, high);
+      await Future.delayed(Duration(microseconds: 15000));
+      quickSort(arr, low, pi - 1);
+      quickSort(arr, pi + 1, high);
+    }
+    _streamController.add(_array);
+  }
+
+  // Bubble Sort
   bubble() async {
     for (int i = 0; i < _array.length; ++i) {
       for (int j = 0; j < _array.length - i - 1; ++j) {
