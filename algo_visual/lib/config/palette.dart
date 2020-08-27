@@ -35,4 +35,11 @@ class Palette {
   static const Color red_3 = Color(0xffFF5252);
   static const Color red_4 = Color(0xffFF0000);
   static const Color red_5 = Color(0xffA70000);
+
+  // icecream Sandwhich
+  static const Color iceCream_1 = Color(0xff23F1DD);
+  static const Color iceCream_2 = Color(0xffFDFFC1);
+  static const Color iceCream_3 = Color(0xffFFDB9C);
+  static const Color iceCream_4 = Color(0xffB7FFDB);
+  static const Color iceCream_5 = Color(0xffFF0052);
 }

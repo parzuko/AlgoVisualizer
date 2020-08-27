@@ -36,6 +36,7 @@ class NumberViewer extends CustomPainter {
       2: summerHues(elementValue),
       3: kindergartenNotebook(elementValue),
       4: ketchupRed(elementValue),
+      5: iceCream(elementValue),
     };
     paint.color = themes[whichColor];
     final modes = {
@@ -110,6 +111,20 @@ class NumberViewer extends CustomPainter {
       return Palette.red_4;
     } else {
       return Palette.red_5;
+    }
+  }
+
+  Color iceCream(int value) {
+    if (this.elementValue < maxVal * .20) {
+      return Palette.iceCream_1;
+    } else if (this.elementValue < maxVal * .40) {
+      return Palette.iceCream_2;
+    } else if (this.elementValue < maxVal * .60) {
+      return Palette.iceCream_3;
+    } else if (this.elementValue < maxVal * .80) {
+      return Palette.iceCream_4;
+    } else {
+      return Palette.iceCream_5;
     }
   }
 

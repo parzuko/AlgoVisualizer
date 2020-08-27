@@ -124,7 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         elementValue: item,
                         elementIndex: counter,
                         maxVal: _sizeOfArray.round(),
-                        whichColor: 4,
+                        whichColor: 5,
                         whichMode: 1,
                       ),
                     );
