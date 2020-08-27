@@ -32,9 +32,10 @@ class NumberViewer extends CustomPainter {
     paint.strokeWidth = barWidth;
     paint.strokeCap = StrokeCap.butt;
     var themes = {
-      1: bluePalette(elementValue),
-      2: vibrantPalette(elementValue),
-      3: pastelPalette(elementValue),
+      1: arcticHorizon(elementValue),
+      2: summerHues(elementValue),
+      3: kindergartenNotebook(elementValue),
+      4: ketchupRed(elementValue),
     };
     paint.color = themes[whichColor];
     final modes = {
@@ -70,7 +71,7 @@ class NumberViewer extends CustomPainter {
     return true;
   }
 
-  Color vibrantPalette(int value) {
+  Color summerHues(int value) {
     if (this.elementValue < maxVal * .20) {
       return Palette.vibrant_1;
     } else if (this.elementValue < maxVal * .40) {
@@ -84,7 +85,7 @@ class NumberViewer extends CustomPainter {
     }
   }
 
-  Color pastelPalette(int value) {
+  Color kindergartenNotebook(int value) {
     if (this.elementValue < maxVal * .20) {
       return Palette.pastel_1;
     } else if (this.elementValue < maxVal * .40) {
@@ -98,7 +99,21 @@ class NumberViewer extends CustomPainter {
     }
   }
 
-  Color bluePalette(int value) {
+  Color ketchupRed(int value) {
+    if (this.elementValue < maxVal * .20) {
+      return Palette.red_1;
+    } else if (this.elementValue < maxVal * .40) {
+      return Palette.red_2;
+    } else if (this.elementValue < maxVal * .60) {
+      return Palette.red_3;
+    } else if (this.elementValue < maxVal * .80) {
+      return Palette.red_4;
+    } else {
+      return Palette.red_5;
+    }
+  }
+
+  Color arcticHorizon(int value) {
     if (this.elementValue < maxVal * .14) {
       return Palette.blue_0;
     } else if (this.elementValue < maxVal * .28) {
