@@ -34,6 +34,7 @@ class NumberViewer extends CustomPainter {
     var themes = {
       1: bluePalette(elementValue),
       2: vibrantPalette(elementValue),
+      3: pastelPalette(elementValue),
     };
     paint.color = themes[whichColor];
     final modes = {
@@ -80,6 +81,20 @@ class NumberViewer extends CustomPainter {
       return Palette.vibrant_4;
     } else {
       return Palette.vibrant_5;
+    }
+  }
+
+  Color pastelPalette(int value) {
+    if (this.elementValue < maxVal * .20) {
+      return Palette.pastel_1;
+    } else if (this.elementValue < maxVal * .40) {
+      return Palette.pastel_2;
+    } else if (this.elementValue < maxVal * .60) {
+      return Palette.pastel_3;
+    } else if (this.elementValue < maxVal * .80) {
+      return Palette.pastel_4;
+    } else {
+      return Palette.pastel_5;
     }
   }
 
