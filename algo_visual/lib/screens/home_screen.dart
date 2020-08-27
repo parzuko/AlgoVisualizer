@@ -104,6 +104,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final double screenWidth = MediaQuery.of(context).size.width;
+    final double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       body: StreamBuilder<Object>(
           stream: _stream,
@@ -117,8 +120,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     return CustomPaint(
                       painter: NumberViewer(
                         // barWidth: 2.0,
-                        barWidth:
-                            MediaQuery.of(context).size.width / _sizeOfArray,
+                        barWidth: screenWidth / _sizeOfArray,
                         elementValue: item,
                         elementIndex: counter,
                         maxVal: _sizeOfArray.round(),
@@ -127,40 +129,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     );
                   }).toList(),
-                ),
-                SizedBox(
-                  height: 550.0,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      child: IconButton(
-                        icon: Icon(
-                          Icons.shuffle,
-                        ),
-                        iconSize: 50.0,
-                        color: Palette.textColor,
-                        onPressed: _shuffle,
-                      ),
-                    ),
-                    Slider(
-                      value: _sizeOfArray,
-                      min: 100,
-                      max: 500,
-                      divisions: 4,
-                      inactiveColor: Palette.textColor,
-                      activeColor: Palette.theButton,
-                      label: "Set Size Of Array To: ${_sizeOfArray.round()}",
-                      onChanged: (double value) {
-                        setState(() {
-                          _sizeOfArray = value;
-                          _shuffle();
-                        });
-                        //_sizeOfArray = value;
-                      },
-                    ),
-                  ],
                 ),
               ],
             );
@@ -199,7 +167,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   fontFamily: 'Segoe UI',
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                int length = _array.length;
+                quickSort(_array, 0, length - 1);
+              },
             ),
           ),
           Expanded(
