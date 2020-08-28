@@ -14,13 +14,11 @@ class SettingsDialog extends StatefulWidget {
 
 class _SettingsDialogState extends State<SettingsDialog> {
   double _sizeOfArray;
-  double _sortingSpeed;
 
   @override
   void initState() {
     super.initState();
     _sizeOfArray = widget.sizeOfArray;
-    _sortingSpeed = widget.sortingSpeed;
   }
 
   @override

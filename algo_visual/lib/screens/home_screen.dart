@@ -12,11 +12,13 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+////////////////////////////GLBOAL VARIABLES/////////////////////////
   List<int> _array = [];
   double _sizeOfArray = 500;
-
   StreamController<List<int>> _streamController;
   Stream<List<int>> _stream;
+
+////////////////////////////SORTING METHODS/////////////////////////
 
   // Selection Sort
   selection() async {
@@ -30,9 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
       int temp = _array[i];
       _array[i] = _array[minIdx];
       _array[minIdx] = temp;
-
       await Future.delayed(Duration(microseconds: 1000));
-      //setState(() {});
       _streamController.add(_array);
     }
   }
@@ -52,7 +52,6 @@ class _HomeScreenState extends State<HomeScreen> {
     int temp = arr[i + 1];
     arr[i + 1] = arr[high];
     arr[high] = temp;
-
     return i + 1;
   }
 
@@ -88,10 +87,10 @@ class _HomeScreenState extends State<HomeScreen> {
     for (int each = 0; each < _sizeOfArray; each++) {
       _array.add(Random().nextInt(_sizeOfArray.round()));
     }
-
-    //setState(() {});
     _streamController.add(_array);
   }
+
+////////////////////////////UTLITIY METHODS/////////////////////////
 
   @override
   void initState() {
@@ -105,7 +104,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
-    final double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
       body: StreamBuilder<Object>(
@@ -119,7 +117,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     counter++;
                     return CustomPaint(
                       painter: NumberViewer(
-                        // barWidth: 2.0,
                         barWidth: screenWidth / _sizeOfArray,
                         elementValue: item,
                         elementIndex: counter,
