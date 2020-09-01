@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 
 class SettingsDialog extends StatefulWidget {
   final double sizeOfArray;
-  final double sortingSpeed;
+  final int currentTheme;
 
-  const SettingsDialog({Key key, this.sizeOfArray, this.sortingSpeed})
+  const SettingsDialog({Key key, this.sizeOfArray, this.currentTheme})
       : super(key: key);
 
   @override
@@ -14,28 +14,26 @@ class SettingsDialog extends StatefulWidget {
 
 class _SettingsDialogState extends State<SettingsDialog> {
   double _sizeOfArray;
+  int currentTheme;
 
   @override
   void initState() {
     super.initState();
     _sizeOfArray = widget.sizeOfArray;
+    currentTheme = widget.currentTheme;
   }
+
+  List<String> colorOptions = [
+    "Arctic Horizon",
+    "Summer Hues",
+    "Kindergarten Notebook",
+    "Ketchup Red",
+    "Ice Cream SandWhich"
+  ];
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Center(
-        child: Text(
-          "SETTINGS",
-          style: TextStyle(
-            color: Palette.brightText,
-            fontSize: 20.0,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'Segoe UI',
-            letterSpacing: 1.0,
-          ),
-        ),
-      ),
-    );
-  }
+    final double screenWidth = MediaQuery.of(context).size.width;
+    final double screenHeight = MediaQuery.of(context).size.height;
+    return AlertDialog();
 }
