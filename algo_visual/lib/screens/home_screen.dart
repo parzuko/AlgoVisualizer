@@ -15,6 +15,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
 ////////////////////////////GLBOAL VARIABLES/////////////////////////
   List<int> _array = [];
+  String currentSortingMethod = "Selection Sort";
   double _sizeOfArray = 500;
   StreamController<List<int>> _streamController;
   Stream<List<int>> _stream;
@@ -155,7 +156,7 @@ class _HomeScreenState extends State<HomeScreen> {
       };
     }
     final double screenWidth = MediaQuery.of(context).size.width;
-
+    final double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       body: StreamBuilder<Object>(
           stream: _stream,
@@ -181,76 +182,85 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             );
           }),
-      bottomNavigationBar: Row(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: <Widget>[
-          Expanded(
-            flex: 1,
-            child: FlatButton(
-              disabledColor: Colors.amber,
-              padding: EdgeInsets.fromLTRB(0, 0, 0, 30),
-              child: Text(
-                "BUBBLE SORT",
-                style: const TextStyle(
-                  color: Palette.textColor,
-                  fontSize: 15.0,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 1,
-                  fontFamily: 'Segoe UI',
-                ),
-              ),
-              onPressed: () {
-                try {
-                  sort("BUBBLE SORT");
-                } catch (NoSuchMethodError) {}
-              },
-            ),
-          ),
-          Expanded(
-            flex: 1,
-            child: FlatButton(
-              disabledColor: Colors.amber,
-              padding: EdgeInsets.fromLTRB(0, 0, 0, 30),
-              child: Text(
-                "QUICK SORT",
-                style: const TextStyle(
-                  color: Palette.textColor,
-                  fontSize: 15.0,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 1,
-                  fontFamily: 'Segoe UI',
-                ),
-              ),
-              onPressed: () {
-                try {
-                  sort("QUICK SORT");
-                } catch (NoSuchMethodError) {}
-              },
-            ),
-          ),
-          Expanded(
-            flex: 1,
-            child: FlatButton(
-              disabledColor: Colors.amber,
-              padding: EdgeInsets.fromLTRB(0, 0, 0, 30),
-              child: Text(
-                "SELECTION SORT",
-                style: const TextStyle(
-                  color: Palette.textColor,
-                  fontSize: 15.0,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 1,
-                  fontFamily: 'Segoe UI',
-                ),
-              ),
-              onPressed: () {
-                try {
-                  sort("SELECTION SORT");
-                } catch (NoSuchMethodError) {}
-              },
-            ),
-          ),
-        ],
+      bottomNavigationBar: DraggableScrollableSheet(
+        initialChildSize: screenHeight / 9500,
+        minChildSize: screenHeight / 9500,
+        maxChildSize: 1,
+        builder: (context, controller) {
+          return Container(
+              decoration: BoxDecoration(color: Palette.textColor),
+              child: ListView.builder(
+                itemCount: 1,
+                controller: controller,
+                itemBuilder: (BuildContext context, index) {
+                  return Column(
+                    children: [
+                      BottomAppBar(
+                        color: Palette.theButton,
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              FlatButton(
+                                onPressed: () {
+                                  if (currentSortingMethod == "Bubble Sort") {
+                                    bubble();
+                                  } else if (currentSortingMethod ==
+                                      "Selection Sort") {
+                                    selection();
+                                  } else {
+                                    quickSort(_array, 0, _array.length - 1);
+                                  }
+                                },
+                                child: Text(
+                                  currentSortingMethod,
+                                  style: TextStyle(
+                                    color: Palette.textColor,
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 1,
+                                    fontFamily: 'Segoe UI',
+                                  ),
+                                ),
+                              ),
+                              IconButton(
+                                icon: Icon(Icons.shuffle),
+                                iconSize: 30.0,
+                                color: Palette.textColor,
+                                onPressed: _shuffle,
+                              ),
+                              IconButton(
+                                icon: Icon(Icons.settings),
+                                iconSize: 30.0,
+                                color: Palette.textColor,
+                                onPressed: showSettingsPage,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Container(
+                        height: 400,
+                        color: Palette.scaffold,
+                        child: Container(
+                          child: showBottomNavigationMenu(),
+                          decoration: BoxDecoration(
+                            color: Palette.textColor,
+                            borderRadius: BorderRadius.only(
+                              topLeft: const Radius.circular(10),
+                              topRight: const Radius.circular(10),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              ));
+        },
       ),
     );
   }
