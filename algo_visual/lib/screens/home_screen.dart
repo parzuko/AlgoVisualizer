@@ -4,6 +4,7 @@ import 'dart:math';
 //import 'package:algo_visual/algos/selection.dart';
 import 'package:algo_visual/config/numbers.dart';
 import 'package:algo_visual/config/palette.dart';
+import 'package:algo_visual/screens/settings.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -17,6 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
   double _sizeOfArray = 500;
   StreamController<List<int>> _streamController;
   Stream<List<int>> _stream;
+  int color = 1;
 
 ////////////////////////////SORTING METHODS/////////////////////////
 
@@ -91,6 +93,25 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
 ////////////////////////////UTLITIY METHODS/////////////////////////
+
+  void showSettingsPage() async {
+    final updatedSettings = await showDialog(
+      context: context,
+      builder: (context) {
+        return SettingsDialog(
+          sizeOfArray: _sizeOfArray,
+          currentTheme: color,
+        );
+      },
+    );
+    if (updatedSettings != null) {
+      setState(() {
+        _sizeOfArray = updatedSettings[0];
+        color = updatedSettings[1];
+      });
+      _shuffle();
+    }
+  }
 
   @override
   void initState() {
@@ -184,7 +205,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   fontFamily: 'Segoe UI',
                 ),
               ),
-              onPressed: selection,
+              onPressed: () {
+                selection();
+              },
             ),
           ),
         ],

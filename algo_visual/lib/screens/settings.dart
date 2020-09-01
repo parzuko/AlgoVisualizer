@@ -49,6 +49,11 @@ class _SettingsDialogState extends State<SettingsDialog> {
           Radius.circular(20.0),
         ),
       ),
+      title: Center(
+        child: Text(
+          'SETTINGS',
+        ),
+      ),
       content: Column(
         children: [
           Text(
@@ -140,6 +145,25 @@ class _SettingsDialogState extends State<SettingsDialog> {
           ),
         ],
       ),
+      actions: <Widget>[
+        FlatButton(
+          onPressed: () {
+            // Use the second argument of Navigator.pop(...) to pass
+            // back a result to the page that opened the dialog
+            Navigator.pop(context, [_sizeOfArray, currentTheme]);
+          },
+          child: Text(
+            'DONE',
+            style: TextStyle(
+              color: Palette.brightText,
+              fontSize: 14.0,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'Segoe UI',
+              letterSpacing: 0.8,
+            ),
+          ),
+        )
+      ],
     );
   }
 }
