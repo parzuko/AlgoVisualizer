@@ -22,21 +22,11 @@ class _HomeScreenState extends State<HomeScreen> {
   int color = 1;
   bool isSelected = true;
 ////////////////////////////SORTING METHODS/////////////////////////
-
-  bool isSorted(List<int> a) {
-    int i = a.length - 1;
-    if (i <= 0) return true;
-    if ((i & 1) > 0) {
-      if (a[i] < a[i - 1]) return false;
-      i--;
-    }
-    for (int ai = a[i]; i > 0; i -= 2)
-      if (ai < (ai = a[i - 1]) || ai < (ai = a[i - 2])) return false;
-    return a[0] <= a[1];
-  }
-
   // Selection Sort
   selection() async {
+    setState(() {
+      isSelected = false;
+    });
     for (int i = 0; i < _array.length - 1; i++) {
       int minIdx = i;
       for (int j = i + 1; j < _array.length - 1; j++) {
@@ -50,6 +40,9 @@ class _HomeScreenState extends State<HomeScreen> {
       await Future.delayed(Duration(microseconds: 1000));
       _streamController.add(_array);
     }
+    setState(() {
+      isSelected = true;
+    });
   }
 
   // Partition Method For Quick Sort
@@ -72,6 +65,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   // Quick Sort
   quickSort(List arr, int low, int high) async {
+    setState(() {
+      isSelected = false;
+    });
     if (low < high) {
       int pi = partition(arr, low, high);
       await Future.delayed(Duration(microseconds: 15000));
@@ -79,10 +75,17 @@ class _HomeScreenState extends State<HomeScreen> {
       quickSort(arr, pi + 1, high);
     }
     _streamController.add(_array);
+
+    setState(() {
+      isSelected = true;
+    });
   }
 
   // Bubble Sort
   bubble() async {
+    setState(() {
+      isSelected = false;
+    });
     for (int i = 0; i < _array.length; ++i) {
       for (int j = 0; j < _array.length - i - 1; ++j) {
         if (_array[j] > _array[j + 1]) {
@@ -91,10 +94,12 @@ class _HomeScreenState extends State<HomeScreen> {
           _array[j + 1] = temp;
         }
         await Future.delayed(Duration(microseconds: 500));
-        // setState(() {});
         _streamController.add(_array);
       }
     }
+    setState(() {
+      isSelected = true;
+    });
   }
 
   _shuffle() {
@@ -102,9 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
     for (int each = 0; each < _sizeOfArray; each++) {
       _array.add(Random().nextInt(_sizeOfArray.round()));
     }
-    setState(() {
-      isSelected = true;
-    });
+
     _streamController.add(_array);
   }
 
@@ -247,22 +250,13 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     var sort;
     if (isSelected) {
-      sort = (String method) {
+      sort = (String method) async {
         if (method == "BUBBLE SORT") {
           bubble();
-          setState(() {
-            isSelected = false;
-          });
         } else if (method == "SELECTION SORT") {
           selection();
-          setState(() {
-            isSelected = false;
-          });
         } else if (method == "QUICK SORT") {
           quickSort(_array, 0, _array.length - 1);
-          setState(() {
-            isSelected = false;
-          });
         }
       };
     }
@@ -348,7 +342,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                 iconSize: 30.0,
                                 color: Palette.textColor,
                                 onPressed: () {
-                                  _shuffle();
+                                  if (isSelected) {
+                                    _shuffle();
+                                  }
                                 },
                               ),
                               IconButton(
@@ -368,10 +364,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: showBottomNavigationMenu(),
                           decoration: BoxDecoration(
                             color: Palette.textColor,
-                            borderRadius: BorderRadius.only(
-                              topLeft: const Radius.circular(10),
-                              topRight: const Radius.circular(10),
-                            ),
+                            // borderRadius: BorderRadius.only(
+                            //   topLeft: const Radius.circular(10),
+                            //   topRight: const Radius.circular(10),
+                            // ),
                           ),
                         ),
                       ),
