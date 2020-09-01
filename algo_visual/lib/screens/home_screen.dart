@@ -23,6 +23,18 @@ class _HomeScreenState extends State<HomeScreen> {
   bool isSelected = true;
 ////////////////////////////SORTING METHODS/////////////////////////
 
+  bool isSorted(List<int> a) {
+    int i = a.length - 1;
+    if (i <= 0) return true;
+    if ((i & 1) > 0) {
+      if (a[i] < a[i - 1]) return false;
+      i--;
+    }
+    for (int ai = a[i]; i > 0; i -= 2)
+      if (ai < (ai = a[i - 1]) || ai < (ai = a[i - 2])) return false;
+    return a[0] <= a[1];
+  }
+
   // Selection Sort
   selection() async {
     for (int i = 0; i < _array.length - 1; i++) {
@@ -335,7 +347,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                 icon: Icon(Icons.shuffle),
                                 iconSize: 30.0,
                                 color: Palette.textColor,
-                                onPressed: _shuffle,
+                                onPressed: () {
+                                  _shuffle();
+                                },
                               ),
                               IconButton(
                                 icon: Icon(Icons.settings),
