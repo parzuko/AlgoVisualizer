@@ -90,10 +90,118 @@ class _HomeScreenState extends State<HomeScreen> {
     for (int each = 0; each < _sizeOfArray; each++) {
       _array.add(Random().nextInt(_sizeOfArray.round()));
     }
+    setState(() {
+      isSelected = true;
+    });
     _streamController.add(_array);
   }
 
 ////////////////////////////UTLITIY METHODS/////////////////////////
+  final modes = {
+    "Normal": 1,
+    "Frenzy": 2,
+    "Reverse": 3,
+  };
+  int mode = 1;
+  Column showBottomNavigationMenu() {
+    return Column(
+      children: [
+        Text(
+          "Mode",
+          style: TextStyle(
+              color: Palette.scaffold,
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 1,
+              fontFamily: 'Segoe UI'),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            FlatButton(
+              onPressed: () {
+                setState(() {
+                  mode = modes["Frenzy"];
+                });
+              },
+              child: Text(
+                "Frenzy",
+                style: TextStyle(
+                    color: Palette.scaffold,
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 1,
+                    fontFamily: 'Segoe UI'),
+              ),
+            ),
+            FlatButton(
+              onPressed: () {
+                setState(() {
+                  mode = modes["Normal"];
+                });
+              },
+              child: Text(
+                "Standard",
+                style: TextStyle(
+                    color: Palette.scaffold,
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 1,
+                    fontFamily: 'Segoe UI'),
+              ),
+            ),
+          ],
+        ),
+        ListTile(
+          title: Text(
+            "Bubble Sort",
+          ),
+          onTap: () {
+            selectSortingMethod("Bubble Sort");
+            //bubble();
+          },
+        ),
+        ListTile(
+          title: Text(
+            "Selection Sort",
+          ),
+          onTap: () {
+            selectSortingMethod("Selection Sort");
+
+            //bubble();
+          },
+        ),
+        ListTile(
+          title: Text("Quick Sort"),
+          onTap: () {
+            selectSortingMethod("Quick Sort");
+            //bubble();
+          },
+        ),
+        ListTile(
+          title: Text("Mast Sort"),
+          onTap: () {
+            selectSortingMethod("Mast Sort");
+            //bubble();
+          },
+        ),
+        ListTile(
+          title: Text("Recursive Sort"),
+          onTap: () {
+            selectSortingMethod("Recursive Sort");
+            //bubble();
+          },
+        ),
+      ],
+    );
+  }
+
+  void selectSortingMethod(String methodName) {
+    //Navigator.pop(context);
+    setState(() {
+      currentSortingMethod = methodName;
+    });
+  }
 
   void showSettingsPage() async {
     final updatedSettings = await showDialog(
@@ -129,25 +237,16 @@ class _HomeScreenState extends State<HomeScreen> {
     if (isSelected) {
       sort = (String method) {
         if (method == "BUBBLE SORT") {
-          setState(() {
-            isSelected = false;
-          });
           bubble();
           setState(() {
             isSelected = false;
           });
         } else if (method == "SELECTION SORT") {
-          setState(() {
-            isSelected = false;
-          });
           selection();
           setState(() {
             isSelected = false;
           });
         } else if (method == "QUICK SORT") {
-          setState(() {
-            isSelected = false;
-          });
           quickSort(_array, 0, _array.length - 1);
           setState(() {
             isSelected = false;
@@ -173,8 +272,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         elementValue: item,
                         elementIndex: counter,
                         maxVal: _sizeOfArray.round(),
-                        whichColor: 2,
-                        whichMode: 1,
+                        whichColor: color,
+                        whichMode: mode,
                       ),
                     );
                   }).toList(),
@@ -183,9 +282,9 @@ class _HomeScreenState extends State<HomeScreen> {
             );
           }),
       bottomNavigationBar: DraggableScrollableSheet(
-        initialChildSize: screenHeight / 9500,
-        minChildSize: screenHeight / 9500,
-        maxChildSize: 1,
+        initialChildSize: 0.065,
+        minChildSize: 0.065,
+        maxChildSize: 0.5,
         builder: (context, controller) {
           return Container(
               decoration: BoxDecoration(color: Palette.textColor),
@@ -207,12 +306,18 @@ class _HomeScreenState extends State<HomeScreen> {
                               FlatButton(
                                 onPressed: () {
                                   if (currentSortingMethod == "Bubble Sort") {
-                                    bubble();
+                                    try {
+                                      sort("BUBBLE SORT");
+                                    } catch (NoSuchMethodError) {}
                                   } else if (currentSortingMethod ==
                                       "Selection Sort") {
-                                    selection();
+                                    try {
+                                      sort("SELECTION SORT");
+                                    } catch (NoSuchMethodError) {}
                                   } else {
-                                    quickSort(_array, 0, _array.length - 1);
+                                    try {
+                                      sort("QUICK SORT");
+                                    } catch (NoSuchMethodError) {}
                                   }
                                 },
                                 child: Text(
