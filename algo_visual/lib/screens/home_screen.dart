@@ -138,13 +138,20 @@ class _HomeScreenState extends State<HomeScreen> {
             FlatButton(
               onPressed: () {
                 setState(() {
-                  mode = modes["Frenzy"];
+                  setState(() {
+                    mode = modes["Frenzy"];
+                    for (var each = 0; each < highlightMode.length; each++) {
+                      highlightMode[each] = false;
+                    }
+                  });
+                  setState(() => highlightMode[0] = !highlightMode[0]);
                 });
               },
               child: Text(
                 "Frenzy Mode",
                 style: TextStyle(
-                    color: Palette.scaffold,
+                    color:
+                        highlightMode[0] ? Palette.theButton : Palette.scaffold,
                     fontSize: 18.0,
                     fontWeight: FontWeight.bold,
                     letterSpacing: 1,
@@ -155,12 +162,17 @@ class _HomeScreenState extends State<HomeScreen> {
               onPressed: () {
                 setState(() {
                   mode = modes["Normal"];
+                  for (var each = 0; each < highlightMode.length; each++) {
+                    highlightMode[each] = false;
+                  }
                 });
+                setState(() => highlightMode[1] = !highlightMode[1]);
               },
               child: Text(
                 "Standard",
                 style: TextStyle(
-                    color: Palette.scaffold,
+                    color:
+                        highlightMode[1] ? Palette.theButton : Palette.scaffold,
                     fontSize: 18.0,
                     fontWeight: FontWeight.bold,
                     letterSpacing: 1,
@@ -171,12 +183,17 @@ class _HomeScreenState extends State<HomeScreen> {
               onPressed: () {
                 setState(() {
                   mode = modes["Reverse"];
+                  for (var each = 0; each < highlightMode.length; each++) {
+                    highlightMode[each] = false;
+                  }
                 });
+                setState(() => highlightMode[2] = !highlightMode[2]);
               },
               child: Text(
                 "DownSideUp",
                 style: TextStyle(
-                    color: Palette.scaffold,
+                    color:
+                        highlightMode[2] ? Palette.theButton : Palette.scaffold,
                     fontSize: 18.0,
                     fontWeight: FontWeight.bold,
                     letterSpacing: 1,
