@@ -21,6 +21,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Stream<List<int>> _stream;
   int color = 1;
   bool isSelected = true;
+  var highlightText = [false, true, false];
+  var highlightMode = [false, true, false];
 ////////////////////////////SORTING METHODS/////////////////////////
   // Selection Sort
   selection() async {
@@ -125,7 +127,7 @@ class _HomeScreenState extends State<HomeScreen> {
           "Mode",
           style: TextStyle(
               color: Palette.scaffold,
-              fontSize: 20.0,
+              fontSize: 22.0,
               fontWeight: FontWeight.bold,
               letterSpacing: 1,
               fontFamily: 'Segoe UI'),
@@ -140,7 +142,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 });
               },
               child: Text(
-                "Frenzy",
+                "Frenzy Mode",
                 style: TextStyle(
                     color: Palette.scaffold,
                     fontSize: 18.0,
@@ -165,46 +167,88 @@ class _HomeScreenState extends State<HomeScreen> {
                     fontFamily: 'Segoe UI'),
               ),
             ),
+            FlatButton(
+              onPressed: () {
+                setState(() {
+                  mode = modes["Reverse"];
+                });
+              },
+              child: Text(
+                "DownSideUp",
+                style: TextStyle(
+                    color: Palette.scaffold,
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 1,
+                    fontFamily: 'Segoe UI'),
+              ),
+            ),
           ],
+        ),
+        Divider(
+          height: 20,
         ),
         ListTile(
           title: Text(
             "Bubble Sort",
+            style: TextStyle(
+              color: highlightText[0] ? Palette.theButton : Palette.brightText,
+              fontSize: 15.0,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 0.7,
+              fontFamily: 'Segoe UI',
+            ),
           ),
           onTap: () {
             selectSortingMethod("Bubble Sort");
-            //bubble();
+            setState(() {
+              for (var each = 0; each < highlightText.length; each++) {
+                highlightText[each] = false;
+              }
+            });
+            setState(() => highlightText[0] = !highlightText[0]);
           },
         ),
         ListTile(
           title: Text(
             "Selection Sort",
+            style: TextStyle(
+              color: highlightText[1] ? Palette.theButton : Palette.brightText,
+              fontSize: 15.0,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 0.7,
+              fontFamily: 'Segoe UI',
+            ),
           ),
           onTap: () {
             selectSortingMethod("Selection Sort");
-
-            //bubble();
+            setState(() {
+              for (var each = 0; each < highlightText.length; each++) {
+                highlightText[each] = false;
+              }
+            });
+            setState(() => highlightText[1] = !highlightText[1]);
           },
         ),
         ListTile(
-          title: Text("Quick Sort"),
+          title: Text(
+            "Quick Sort",
+            style: TextStyle(
+              color: highlightText[2] ? Palette.theButton : Palette.brightText,
+              fontSize: 15.0,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 0.7,
+              fontFamily: 'Segoe UI',
+            ),
+          ),
           onTap: () {
             selectSortingMethod("Quick Sort");
-            //bubble();
-          },
-        ),
-        ListTile(
-          title: Text("Mast Sort"),
-          onTap: () {
-            selectSortingMethod("Mast Sort");
-            //bubble();
-          },
-        ),
-        ListTile(
-          title: Text("Recursive Sort"),
-          onTap: () {
-            selectSortingMethod("Recursive Sort");
-            //bubble();
+            setState(() {
+              for (var each = 0; each < highlightText.length; each++) {
+                highlightText[each] = false;
+              }
+            });
+            setState(() => highlightText[2] = !highlightText[2]);
           },
         ),
       ],
