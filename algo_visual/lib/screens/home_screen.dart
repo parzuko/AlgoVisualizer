@@ -19,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
   StreamController<List<int>> _streamController;
   Stream<List<int>> _stream;
   int color = 1;
-
+  bool isSelected = true;
 ////////////////////////////SORTING METHODS/////////////////////////
 
   // Selection Sort
@@ -124,6 +124,36 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var sort;
+    if (isSelected) {
+      sort = (String method) {
+        if (method == "BUBBLE SORT") {
+          setState(() {
+            isSelected = false;
+          });
+          bubble();
+          setState(() {
+            isSelected = false;
+          });
+        } else if (method == "SELECTION SORT") {
+          setState(() {
+            isSelected = false;
+          });
+          selection();
+          setState(() {
+            isSelected = false;
+          });
+        } else if (method == "QUICK SORT") {
+          setState(() {
+            isSelected = false;
+          });
+          quickSort(_array, 0, _array.length - 1);
+          setState(() {
+            isSelected = false;
+          });
+        }
+      };
+    }
     final double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
@@ -142,7 +172,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         elementValue: item,
                         elementIndex: counter,
                         maxVal: _sizeOfArray.round(),
-                        whichColor: 5,
+                        whichColor: 2,
                         whichMode: 1,
                       ),
                     );
@@ -157,6 +187,7 @@ class _HomeScreenState extends State<HomeScreen> {
           Expanded(
             flex: 1,
             child: FlatButton(
+              disabledColor: Colors.amber,
               padding: EdgeInsets.fromLTRB(0, 0, 0, 30),
               child: Text(
                 "BUBBLE SORT",
@@ -168,12 +199,17 @@ class _HomeScreenState extends State<HomeScreen> {
                   fontFamily: 'Segoe UI',
                 ),
               ),
-              onPressed: bubble,
+              onPressed: () {
+                try {
+                  sort("BUBBLE SORT");
+                } catch (NoSuchMethodError) {}
+              },
             ),
           ),
           Expanded(
             flex: 1,
             child: FlatButton(
+              disabledColor: Colors.amber,
               padding: EdgeInsets.fromLTRB(0, 0, 0, 30),
               child: Text(
                 "QUICK SORT",
@@ -186,14 +222,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               onPressed: () {
-                int length = _array.length;
-                quickSort(_array, 0, length - 1);
+                try {
+                  sort("QUICK SORT");
+                } catch (NoSuchMethodError) {}
               },
             ),
           ),
           Expanded(
             flex: 1,
             child: FlatButton(
+              disabledColor: Colors.amber,
               padding: EdgeInsets.fromLTRB(0, 0, 0, 30),
               child: Text(
                 "SELECTION SORT",
@@ -206,7 +244,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               onPressed: () {
-                selection();
+                try {
+                  sort("SELECTION SORT");
+                } catch (NoSuchMethodError) {}
               },
             ),
           ),
