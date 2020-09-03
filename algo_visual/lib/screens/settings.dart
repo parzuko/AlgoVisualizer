@@ -1,3 +1,4 @@
+import 'package:algo_visual/config/list_view_info.dart';
 import 'package:algo_visual/config/palette.dart';
 import 'package:flutter/material.dart';
 
@@ -23,12 +24,12 @@ class _SettingsDialogState extends State<SettingsDialog> {
     currentTheme = widget.currentTheme;
   }
 
-  List<String> colorOptions = [
-    "Arctic Horizon",
-    "Summer Hues",
-    "Kindergarten Notebook",
-    "Ketchup Red",
-    "Ice Cream SandWhich"
+  List<ColorList> colorOptions = [
+    ColorList(colorName: "Arctic Horizon", imageLocation: "arcticblue.jpg"),
+    ColorList(colorName: "Summer Hues", imageLocation: "sh.jpg"),
+    ColorList(colorName: "Kindergarten Notebook", imageLocation: "pastel.jpg"),
+    ColorList(colorName: "Ketchup Red", imageLocation: "ketchup.jpg"),
+    ColorList(colorName: "Ice Cream Sandwhich", imageLocation: "ic.jpg"),
   ];
 
   @override
@@ -128,8 +129,12 @@ class _SettingsDialogState extends State<SettingsDialog> {
                       print("this is index & mode $index");
                       // print("this is index & mode $mode");
                     },
+                    leading: CircleAvatar(
+                      backgroundImage: AssetImage(
+                          "assets/${colorOptions[index].imageLocation}"),
+                    ),
                     title: Text(
-                      colorOptions[index],
+                      colorOptions[index].colorName,
                       style: TextStyle(
                         color: Palette.scaffold,
                         fontSize: 18.0,
