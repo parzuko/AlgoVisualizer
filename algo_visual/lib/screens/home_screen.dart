@@ -4,6 +4,7 @@ import 'dart:math';
 //import 'package:algo_visual/algos/selection.dart';
 import 'package:algo_visual/config/numbers.dart';
 import 'package:algo_visual/config/palette.dart';
+import 'package:algo_visual/config/toastie.dart';
 import 'package:algo_visual/screens/settings.dart';
 import 'package:flutter/material.dart';
 
@@ -114,6 +115,11 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
 ////////////////////////////UTLITIY METHODS/////////////////////////
+
+  void showToast(String msg, {int duration, int gravity}) {
+    Toastie.show(msg, context, duration: duration, gravity: gravity);
+  }
+
   final modes = {
     "Normal": 1,
     "Frenzy": 2,
@@ -407,6 +413,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                 onPressed: () {
                                   if (isSelected) {
                                     _shuffle();
+                                  } else {
+                                    showToast(
+                                      "$currentSortingMethod In Process.",
+                                      gravity: Toastie.bottom,
+                                      duration: Toastie.lengthLong,
+                                    );
                                   }
                                 },
                               ),
@@ -414,7 +426,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                 icon: Icon(Icons.settings),
                                 iconSize: 30.0,
                                 color: Palette.textColor,
-                                onPressed: showSettingsPage,
+                                onPressed: () {
+                                  if (isSelected) {
+                                    showSettingsPage();
+                                  } else {
+                                    showToast(
+                                      "$currentSortingMethod In Process.",
+                                      gravity: Toastie.bottom,
+                                      duration: Toastie.lengthLong,
+                                    );
+                                  }
+                                },
                               ),
                             ],
                           ),
