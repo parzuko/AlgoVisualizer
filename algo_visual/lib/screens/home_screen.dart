@@ -323,6 +323,8 @@ class _HomeScreenState extends State<HomeScreen> {
     }
     final double screenWidth = MediaQuery.of(context).size.width;
     final double screenHeight = MediaQuery.of(context).size.height;
+    final ratioHeight = 65 / screenHeight;
+    final containerHeight = 500 / screenHeight;
     return Scaffold(
       body: StreamBuilder<Object>(
           stream: _stream,
@@ -349,9 +351,9 @@ class _HomeScreenState extends State<HomeScreen> {
             );
           }),
       bottomNavigationBar: DraggableScrollableSheet(
-        initialChildSize: 0.065,
-        minChildSize: 0.065,
-        maxChildSize: 0.5,
+        initialChildSize: ratioHeight,
+        minChildSize: ratioHeight,
+        maxChildSize: containerHeight,
         builder: (context, controller) {
           return Container(
               decoration: BoxDecoration(color: Palette.textColor),
