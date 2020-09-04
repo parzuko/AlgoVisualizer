@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 class SettingsDialog extends StatefulWidget {
   final double sizeOfArray;
   final int currentTheme;
+  final List<bool> theThemes;
 
-  const SettingsDialog({Key key, this.sizeOfArray, this.currentTheme})
+  const SettingsDialog(
+      {Key key, this.sizeOfArray, this.currentTheme, this.theThemes})
       : super(key: key);
 
   @override
@@ -16,12 +18,14 @@ class SettingsDialog extends StatefulWidget {
 class _SettingsDialogState extends State<SettingsDialog> {
   double _sizeOfArray;
   int currentTheme;
+  List<bool> theThemes;
 
   @override
   void initState() {
     super.initState();
     _sizeOfArray = widget.sizeOfArray;
     currentTheme = widget.currentTheme;
+    theThemes = widget.theThemes;
   }
 
   List<ColorList> colorOptions = [
@@ -35,6 +39,7 @@ class _SettingsDialogState extends State<SettingsDialog> {
   @override
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
+
     final double screenHeight = MediaQuery.of(context).size.height;
     return AlertDialog(
       scrollable: true,
@@ -125,9 +130,12 @@ class _SettingsDialogState extends State<SettingsDialog> {
                       setState(() {
                         currentTheme = index + 1;
                       });
-                      //mode = index;
-                      print("this is index & mode $index");
-                      // print("this is index & mode $mode");
+                      setState(() {
+                        for (var each = 0; each < theThemes.length; each++) {
+                          theThemes[each] = false;
+                        }
+                      });
+                      setState(() => theThemes[index] = !theThemes[index]);
                     },
                     leading: CircleAvatar(
                       backgroundImage: AssetImage(
@@ -136,7 +144,9 @@ class _SettingsDialogState extends State<SettingsDialog> {
                     title: Text(
                       colorOptions[index].colorName,
                       style: TextStyle(
-                        color: Palette.scaffold,
+                        color: theThemes[index]
+                            ? Palette.theButton
+                            : Palette.scaffold,
                         fontSize: 18.0,
                         fontWeight: FontWeight.bold,
                         fontFamily: 'Segoe UI',
@@ -153,9 +163,8 @@ class _SettingsDialogState extends State<SettingsDialog> {
       actions: <Widget>[
         FlatButton(
           onPressed: () {
-            // Use the second argument of Navigator.pop(...) to pass
-            // back a result to the page that opened the dialog
-            Navigator.pop(context, [_sizeOfArray, currentTheme]);
+            print(theThemes);
+            Navigator.pop(context, [_sizeOfArray, currentTheme, theThemes]);
           },
           child: Text(
             'DONE',

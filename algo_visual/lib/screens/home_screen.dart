@@ -23,6 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int color = 1;
   bool isSelected = true;
   var highlightText = [false, true, false];
+  var theThemes = [true, false, false, false, false];
   var highlightMode = [false, true, false];
 ////////////////////////////SORTING METHODS/////////////////////////
   // Selection Sort
@@ -292,6 +293,7 @@ class _HomeScreenState extends State<HomeScreen> {
         return SettingsDialog(
           sizeOfArray: _sizeOfArray,
           currentTheme: color,
+          theThemes: theThemes,
         );
       },
     );
@@ -299,6 +301,7 @@ class _HomeScreenState extends State<HomeScreen> {
       setState(() {
         _sizeOfArray = updatedSettings[0];
         color = updatedSettings[1];
+        theThemes = updatedSettings[2];
       });
       _shuffle();
     }
