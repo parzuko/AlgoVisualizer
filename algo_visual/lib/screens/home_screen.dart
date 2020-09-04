@@ -22,10 +22,33 @@ class _HomeScreenState extends State<HomeScreen> {
   Stream<List<int>> _stream;
   int color = 1;
   bool isSelected = true;
-  var highlightText = [false, true, false];
+  var highlightText = [false, true, false, false];
   var theThemes = [true, false, false, false, false];
   var highlightMode = [false, true, false];
 ////////////////////////////SORTING METHODS/////////////////////////
+
+  // Insertion Sort
+  insertion() async {
+    setState(() {
+      isSelected = false;
+    });
+    for (int i = 1; i < _array.length; i++) {
+      int key = _array[i];
+      int j = i - 1;
+      while (j >= 0 && key < _array[j]) {
+        _array[j + 1] = _array[j];
+        j--;
+      }
+      await Future.delayed(Duration(microseconds: 10000));
+      _streamController.add(_array);
+      _array[j + 1] = key;
+    }
+
+    setState(() {
+      isSelected = true;
+    });
+  }
+
   // Selection Sort
   selection() async {
     setState(() {
@@ -275,6 +298,27 @@ class _HomeScreenState extends State<HomeScreen> {
             setState(() => highlightText[2] = !highlightText[2]);
           },
         ),
+        ListTile(
+          title: Text(
+            "Insertion Sort",
+            style: TextStyle(
+              color: highlightText[3] ? Palette.theButton : Palette.brightText,
+              fontSize: 15.0,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 0.7,
+              fontFamily: 'Segoe UI',
+            ),
+          ),
+          onTap: () {
+            selectSortingMethod("Insertion Sort");
+            setState(() {
+              for (var each = 0; each < highlightText.length; each++) {
+                highlightText[each] = false;
+              }
+            });
+            setState(() => highlightText[3] = !highlightText[3]);
+          },
+        ),
       ],
     );
   }
@@ -327,6 +371,8 @@ class _HomeScreenState extends State<HomeScreen> {
           selection();
         } else if (method == "QUICK SORT") {
           quickSort(_array, 0, _array.length - 1);
+        } else if (method == "INSERTION SORT") {
+          insertion();
         }
       };
     }
@@ -391,6 +437,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                       "Selection Sort") {
                                     try {
                                       sort("SELECTION SORT");
+                                    } catch (NoSuchMethodError) {}
+                                  } else if (currentSortingMethod ==
+                                      "Insertion Sort") {
+                                    try {
+                                      sort("INSERTION SORT");
                                     } catch (NoSuchMethodError) {}
                                   } else {
                                     try {

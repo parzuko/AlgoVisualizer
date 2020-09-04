@@ -163,7 +163,6 @@ class _SettingsDialogState extends State<SettingsDialog> {
       actions: <Widget>[
         FlatButton(
           onPressed: () {
-            print(theThemes);
             Navigator.pop(context, [_sizeOfArray, currentTheme, theThemes]);
           },
           child: Text(
