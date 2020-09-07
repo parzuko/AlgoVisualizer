@@ -162,75 +162,81 @@ class _HomeScreenState extends State<HomeScreen> {
               letterSpacing: 1,
               fontFamily: 'Segoe UI'),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            FlatButton(
-              onPressed: () {
-                setState(() {
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              FlatButton(
+                onPressed: () {
                   setState(() {
-                    mode = modes["Frenzy"];
+                    setState(() {
+                      mode = modes["Frenzy"];
+                      for (var each = 0; each < highlightMode.length; each++) {
+                        highlightMode[each] = false;
+                      }
+                    });
+                    setState(() => highlightMode[0] = !highlightMode[0]);
+                  });
+                },
+                child: Text(
+                  "Frenzy Mode",
+                  style: TextStyle(
+                      color: highlightMode[0]
+                          ? Palette.theButton
+                          : Palette.scaffold,
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 1,
+                      fontFamily: 'Segoe UI'),
+                ),
+              ),
+              FlatButton(
+                onPressed: () {
+                  setState(() {
+                    mode = modes["Normal"];
                     for (var each = 0; each < highlightMode.length; each++) {
                       highlightMode[each] = false;
                     }
                   });
-                  setState(() => highlightMode[0] = !highlightMode[0]);
-                });
-              },
-              child: Text(
-                "Frenzy Mode",
-                style: TextStyle(
-                    color:
-                        highlightMode[0] ? Palette.theButton : Palette.scaffold,
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 1,
-                    fontFamily: 'Segoe UI'),
+                  setState(() => highlightMode[1] = !highlightMode[1]);
+                },
+                child: Text(
+                  "Standard",
+                  style: TextStyle(
+                      color: highlightMode[1]
+                          ? Palette.theButton
+                          : Palette.scaffold,
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 1,
+                      fontFamily: 'Segoe UI'),
+                ),
               ),
-            ),
-            FlatButton(
-              onPressed: () {
-                setState(() {
-                  mode = modes["Normal"];
-                  for (var each = 0; each < highlightMode.length; each++) {
-                    highlightMode[each] = false;
-                  }
-                });
-                setState(() => highlightMode[1] = !highlightMode[1]);
-              },
-              child: Text(
-                "Standard",
-                style: TextStyle(
-                    color:
-                        highlightMode[1] ? Palette.theButton : Palette.scaffold,
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 1,
-                    fontFamily: 'Segoe UI'),
+              FlatButton(
+                onPressed: () {
+                  setState(() {
+                    mode = modes["Reverse"];
+                    for (var each = 0; each < highlightMode.length; each++) {
+                      highlightMode[each] = false;
+                    }
+                  });
+                  setState(() => highlightMode[2] = !highlightMode[2]);
+                },
+                child: Text(
+                  "DownSideUp",
+                  style: TextStyle(
+                      color: highlightMode[2]
+                          ? Palette.theButton
+                          : Palette.scaffold,
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 1,
+                      fontFamily: 'Segoe UI'),
+                ),
               ),
-            ),
-            FlatButton(
-              onPressed: () {
-                setState(() {
-                  mode = modes["Reverse"];
-                  for (var each = 0; each < highlightMode.length; each++) {
-                    highlightMode[each] = false;
-                  }
-                });
-                setState(() => highlightMode[2] = !highlightMode[2]);
-              },
-              child: Text(
-                "DownSideUp",
-                style: TextStyle(
-                    color:
-                        highlightMode[2] ? Palette.theButton : Palette.scaffold,
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 1,
-                    fontFamily: 'Segoe UI'),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
         Divider(
           height: 20,
