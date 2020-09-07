@@ -242,11 +242,26 @@ class _HomeScreenState extends State<HomeScreen> {
           height: 20,
         ),
         ListTile(
+          leading: Icon(
+            Icons.bubble_chart,
+            color: Palette.scaffold,
+            size: 35,
+          ),
           title: Text(
             "Bubble Sort",
             style: TextStyle(
               color: highlightText[0] ? Palette.theButton : Palette.brightText,
               fontSize: 15.0,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 0.7,
+              fontFamily: 'Segoe UI',
+            ),
+          ),
+          trailing: Text(
+            "Best Time Complexity O(n)",
+            style: TextStyle(
+              color: highlightText[0] ? Palette.scaffold : Palette.textColor,
+              fontSize: 13.0,
               fontWeight: FontWeight.bold,
               letterSpacing: 0.7,
               fontFamily: 'Segoe UI',
@@ -263,6 +278,21 @@ class _HomeScreenState extends State<HomeScreen> {
           },
         ),
         ListTile(
+          leading: Icon(
+            Icons.select_all,
+            color: Palette.scaffold,
+            size: 35,
+          ),
+          trailing: Text(
+            "Best Time Complexity O(n)²",
+            style: TextStyle(
+              color: highlightText[1] ? Palette.scaffold : Palette.textColor,
+              fontSize: 13.0,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 0.7,
+              fontFamily: 'Segoe UI',
+            ),
+          ),
           title: Text(
             "Selection Sort",
             style: TextStyle(
@@ -284,6 +314,21 @@ class _HomeScreenState extends State<HomeScreen> {
           },
         ),
         ListTile(
+          leading: Icon(
+            Icons.directions_run,
+            color: Palette.scaffold,
+            size: 35,
+          ),
+          trailing: Text(
+            "Best Time Complexity O(nlogn)",
+            style: TextStyle(
+              color: highlightText[2] ? Palette.scaffold : Palette.textColor,
+              fontSize: 13.0,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 0.7,
+              fontFamily: 'Segoe UI',
+            ),
+          ),
           title: Text(
             "Quick Sort",
             style: TextStyle(
@@ -305,6 +350,21 @@ class _HomeScreenState extends State<HomeScreen> {
           },
         ),
         ListTile(
+          leading: Icon(
+            Icons.settings_input_svideo,
+            color: Palette.scaffold,
+            size: 35,
+          ),
+          trailing: Text(
+            "Best Time Complexity O(n)",
+            style: TextStyle(
+              color: highlightText[3] ? Palette.scaffold : Palette.textColor,
+              fontSize: 13.0,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 0.7,
+              fontFamily: 'Segoe UI',
+            ),
+          ),
           title: Text(
             "Insertion Sort",
             style: TextStyle(
