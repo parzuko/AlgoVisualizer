@@ -491,7 +491,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               FlatButton(
                                 onPressed: () {
@@ -526,37 +526,43 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                 ),
                               ),
-                              IconButton(
-                                icon: Icon(Icons.shuffle),
-                                iconSize: 30.0,
-                                color: Palette.textColor,
-                                onPressed: () {
-                                  if (isSelected) {
-                                    _shuffle();
-                                  } else {
-                                    showToast(
-                                      "$currentSortingMethod In Process.",
-                                      gravity: Toastie.bottom,
-                                      duration: Toastie.lengthLong,
-                                    );
-                                  }
-                                },
-                              ),
-                              IconButton(
-                                icon: Icon(Icons.settings),
-                                iconSize: 30.0,
-                                color: Palette.textColor,
-                                onPressed: () {
-                                  if (isSelected) {
-                                    showSettingsPage();
-                                  } else {
-                                    showToast(
-                                      "$currentSortingMethod In Process.",
-                                      gravity: Toastie.bottom,
-                                      duration: Toastie.lengthLong,
-                                    );
-                                  }
-                                },
+                              SizedBox(width: screenWidth / 3),
+                              Row(
+                                children: [
+                                  IconButton(
+                                    padding: EdgeInsets.fromLTRB(0.5, 0, 0, 0),
+                                    icon: Icon(Icons.cached),
+                                    iconSize: 30.0,
+                                    color: Palette.textColor,
+                                    onPressed: () {
+                                      if (isSelected) {
+                                        _shuffle();
+                                      } else {
+                                        showToast(
+                                          "$currentSortingMethod In Process.",
+                                          gravity: Toastie.bottom,
+                                          duration: Toastie.lengthLong,
+                                        );
+                                      }
+                                    },
+                                  ),
+                                  IconButton(
+                                    icon: Icon(Icons.settings),
+                                    iconSize: 30.0,
+                                    color: Palette.textColor,
+                                    onPressed: () {
+                                      if (isSelected) {
+                                        showSettingsPage();
+                                      } else {
+                                        showToast(
+                                          "$currentSortingMethod In Process.",
+                                          gravity: Toastie.bottom,
+                                          duration: Toastie.lengthLong,
+                                        );
+                                      }
+                                    },
+                                  ),
+                                ],
                               ),
                             ],
                           ),
