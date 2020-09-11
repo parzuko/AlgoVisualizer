@@ -28,17 +28,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   var highlightText = [false, true, false, false];
   var theThemes = [true, false, false, false, false];
   var highlightMode = [false, true, false];
-
 ////////////////////////////SORTING METHODS/////////////////////////
 
   // Insertion Sort
   insertion() async {
-    setState(() {
-      play_pause
-          ? _animationController.reverse()
-          : _animationController.forward();
-      play_pause = !play_pause;
-    });
     setState(() {
       isSelected = false;
     });
@@ -57,22 +50,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     setState(() {
       isSelected = true;
     });
-    setState(() {
-      play_pause
-          ? _animationController.reverse()
-          : _animationController.forward();
-      play_pause = !play_pause;
-    });
   }
 
   // Selection Sort
   selection() async {
-    setState(() {
-      play_pause
-          ? _animationController.reverse()
-          : _animationController.forward();
-      play_pause = !play_pause;
-    });
     setState(() {
       isSelected = false;
     });
@@ -91,12 +72,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     }
     setState(() {
       isSelected = true;
-    });
-    setState(() {
-      play_pause
-          ? _animationController.reverse()
-          : _animationController.forward();
-      play_pause = !play_pause;
     });
   }
 
@@ -121,12 +96,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   // Quick Sort
   quickSort(List arr, int low, int high) async {
     setState(() {
-      play_pause
-          ? _animationController.reverse()
-          : _animationController.forward();
-      play_pause = !play_pause;
-    });
-    setState(() {
       isSelected = false;
     });
     if (low < high) {
@@ -140,22 +109,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     setState(() {
       isSelected = true;
     });
-    setState(() {
-      play_pause
-          ? _animationController.reverse()
-          : _animationController.forward();
-      play_pause = !play_pause;
-    });
   }
 
   // Bubble Sort
   bubble() async {
-    setState(() {
-      play_pause
-          ? _animationController.reverse()
-          : _animationController.forward();
-      play_pause = !play_pause;
-    });
     setState(() {
       isSelected = false;
     });
@@ -172,12 +129,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     }
     setState(() {
       isSelected = true;
-    });
-    setState(() {
-      play_pause
-          ? _animationController.reverse()
-          : _animationController.forward();
-      play_pause = !play_pause;
     });
   }
 
@@ -453,19 +404,300 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             child: ListView.builder(
               itemCount: 1,
               itemBuilder: (BuildContext context, index) {
-                return Column(
-                  children: [
-                    Container(
-                      color: Palette.scaffold,
-                      child: Container(
-                        child: showBottomNavigationMenu(),
-                        decoration: BoxDecoration(
-                          color: Palette.textColor,
+                return StatefulBuilder(builder: (
+                  BuildContext context,
+                  StateSetter setState,
+                ) {
+                  return Column(
+                    children: [
+                      Container(
+                        color: Palette.scaffold,
+                        child: Container(
+                          child: Column(
+                            children: [
+                              Text(
+                                "Mode",
+                                style: TextStyle(
+                                    color: Palette.scaffold,
+                                    fontSize: 22.0,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 1,
+                                    fontFamily: 'Segoe UI'),
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    FlatButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          setState(() {
+                                            mode = modes["Frenzy"];
+                                            for (var each = 0;
+                                                each < highlightMode.length;
+                                                each++) {
+                                              highlightMode[each] = false;
+                                            }
+                                          });
+                                          setState(() => highlightMode[0] =
+                                              !highlightMode[0]);
+                                        });
+                                      },
+                                      child: Text(
+                                        "Frenzy Mode",
+                                        style: TextStyle(
+                                            color: highlightMode[0]
+                                                ? Palette.theButton
+                                                : Palette.scaffold,
+                                            fontSize: 18.0,
+                                            fontWeight: FontWeight.bold,
+                                            letterSpacing: 1,
+                                            fontFamily: 'Segoe UI'),
+                                      ),
+                                    ),
+                                    FlatButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          mode = modes["Normal"];
+                                          for (var each = 0;
+                                              each < highlightMode.length;
+                                              each++) {
+                                            highlightMode[each] = false;
+                                          }
+                                        });
+                                        setState(() => highlightMode[1] =
+                                            !highlightMode[1]);
+                                      },
+                                      child: Text(
+                                        "Standard",
+                                        style: TextStyle(
+                                            color: highlightMode[1]
+                                                ? Palette.theButton
+                                                : Palette.scaffold,
+                                            fontSize: 18.0,
+                                            fontWeight: FontWeight.bold,
+                                            letterSpacing: 1,
+                                            fontFamily: 'Segoe UI'),
+                                      ),
+                                    ),
+                                    FlatButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          mode = modes["Reverse"];
+                                          for (var each = 0;
+                                              each < highlightMode.length;
+                                              each++) {
+                                            highlightMode[each] = false;
+                                          }
+                                        });
+                                        setState(() => highlightMode[2] =
+                                            !highlightMode[2]);
+                                      },
+                                      child: Text(
+                                        "DownSideUp",
+                                        style: TextStyle(
+                                            color: highlightMode[2]
+                                                ? Palette.theButton
+                                                : Palette.scaffold,
+                                            fontSize: 18.0,
+                                            fontWeight: FontWeight.bold,
+                                            letterSpacing: 1,
+                                            fontFamily: 'Segoe UI'),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Divider(
+                                height: 20,
+                              ),
+                              ListTile(
+                                leading: Icon(
+                                  Icons.bubble_chart,
+                                  color: Palette.scaffold,
+                                  size: 35,
+                                ),
+                                title: Text(
+                                  "Bubble Sort",
+                                  style: TextStyle(
+                                    color: highlightText[0]
+                                        ? Palette.theButton
+                                        : Palette.brightText,
+                                    fontSize: 15.0,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 0.7,
+                                    fontFamily: 'Segoe UI',
+                                  ),
+                                ),
+                                trailing: Text(
+                                  "Best Time Complexity O(n)",
+                                  style: TextStyle(
+                                    color: highlightText[0]
+                                        ? Palette.scaffold
+                                        : Palette.textColor,
+                                    fontSize: 13.0,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 0.7,
+                                    fontFamily: 'Segoe UI',
+                                  ),
+                                ),
+                                onTap: () {
+                                  selectSortingMethod("Bubble Sort");
+                                  setState(() {
+                                    for (var each = 0;
+                                        each < highlightText.length;
+                                        each++) {
+                                      highlightText[each] = false;
+                                    }
+                                  });
+                                  setState(() =>
+                                      highlightText[0] = !highlightText[0]);
+                                },
+                              ),
+                              ListTile(
+                                leading: Icon(
+                                  Icons.select_all,
+                                  color: Palette.scaffold,
+                                  size: 35,
+                                ),
+                                trailing: Text(
+                                  "Best Time Complexity O(n)²",
+                                  style: TextStyle(
+                                    color: highlightText[1]
+                                        ? Palette.scaffold
+                                        : Palette.textColor,
+                                    fontSize: 13.0,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 0.7,
+                                    fontFamily: 'Segoe UI',
+                                  ),
+                                ),
+                                title: Text(
+                                  "Selection Sort",
+                                  style: TextStyle(
+                                    color: highlightText[1]
+                                        ? Palette.theButton
+                                        : Palette.brightText,
+                                    fontSize: 15.0,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 0.7,
+                                    fontFamily: 'Segoe UI',
+                                  ),
+                                ),
+                                onTap: () {
+                                  selectSortingMethod("Selection Sort");
+                                  setState(() {
+                                    for (var each = 0;
+                                        each < highlightText.length;
+                                        each++) {
+                                      highlightText[each] = false;
+                                    }
+                                  });
+                                  setState(() =>
+                                      highlightText[1] = !highlightText[1]);
+                                },
+                              ),
+                              ListTile(
+                                leading: Icon(
+                                  Icons.directions_run,
+                                  color: Palette.scaffold,
+                                  size: 35,
+                                ),
+                                trailing: Text(
+                                  "Best Time Complexity O(nlogn)",
+                                  style: TextStyle(
+                                    color: highlightText[2]
+                                        ? Palette.scaffold
+                                        : Palette.textColor,
+                                    fontSize: 13.0,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 0.7,
+                                    fontFamily: 'Segoe UI',
+                                  ),
+                                ),
+                                title: Text(
+                                  "Quick Sort",
+                                  style: TextStyle(
+                                    color: highlightText[2]
+                                        ? Palette.theButton
+                                        : Palette.brightText,
+                                    fontSize: 15.0,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 0.7,
+                                    fontFamily: 'Segoe UI',
+                                  ),
+                                ),
+                                onTap: () {
+                                  selectSortingMethod("Quick Sort");
+                                  setState(() {
+                                    for (var each = 0;
+                                        each < highlightText.length;
+                                        each++) {
+                                      highlightText[each] = false;
+                                    }
+                                  });
+                                  setState(() =>
+                                      highlightText[2] = !highlightText[2]);
+                                },
+                              ),
+                              ListTile(
+                                leading: Icon(
+                                  Icons.settings_input_svideo,
+                                  color: Palette.scaffold,
+                                  size: 35,
+                                ),
+                                trailing: Text(
+                                  "Best Time Complexity O(n)",
+                                  style: TextStyle(
+                                    color: highlightText[3]
+                                        ? Palette.scaffold
+                                        : Palette.textColor,
+                                    fontSize: 13.0,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 0.7,
+                                    fontFamily: 'Segoe UI',
+                                  ),
+                                ),
+                                title: Text(
+                                  "Insertion Sort",
+                                  style: TextStyle(
+                                    color: highlightText[3]
+                                        ? Palette.theButton
+                                        : Palette.brightText,
+                                    fontSize: 15.0,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 0.7,
+                                    fontFamily: 'Segoe UI',
+                                  ),
+                                ),
+                                onTap: () {
+                                  selectSortingMethod("Insertion Sort");
+                                  setState(() {
+                                    for (var each = 0;
+                                        each < highlightText.length;
+                                        each++) {
+                                      highlightText[each] = false;
+                                    }
+                                  });
+                                  setState(() =>
+                                      highlightText[3] = !highlightText[3]);
+                                },
+                              ),
+                            ],
+                          ),
+                          decoration: BoxDecoration(
+                            color: Palette.textColor,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                );
+                    ],
+                  );
+                });
               },
             ),
           );
@@ -558,37 +790,41 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               ],
             );
           }),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(
-          Icons.show_chart,
-          size: 30,
+      floatingActionButton: Container(
+        height: screenWidth * 0.2,
+        width: screenWidth * 0.2,
+        child: FloatingActionButton(
+          child: Icon(
+            Icons.show_chart,
+            size: 40,
+          ),
+          backgroundColor: Palette.brightText,
+          onPressed: () {
+            if (currentSortingMethod == "Bubble Sort") {
+              try {
+                sort("BUBBLE SORT");
+              } catch (NoSuchMethodError) {}
+            } else if (currentSortingMethod == "Selection Sort") {
+              try {
+                sort("SELECTION SORT");
+              } catch (NoSuchMethodError) {}
+            } else if (currentSortingMethod == "Insertion Sort") {
+              try {
+                sort("INSERTION SORT");
+              } catch (NoSuchMethodError) {}
+            } else {
+              try {
+                sort("QUICK SORT");
+              } catch (NoSuchMethodError) {}
+            }
+          },
         ),
-        backgroundColor: Palette.brightText,
-        onPressed: () {
-          if (currentSortingMethod == "Bubble Sort") {
-            try {
-              sort("BUBBLE SORT");
-            } catch (NoSuchMethodError) {}
-          } else if (currentSortingMethod == "Selection Sort") {
-            try {
-              sort("SELECTION SORT");
-            } catch (NoSuchMethodError) {}
-          } else if (currentSortingMethod == "Insertion Sort") {
-            try {
-              sort("INSERTION SORT");
-            } catch (NoSuchMethodError) {}
-          } else {
-            try {
-              sort("QUICK SORT");
-            } catch (NoSuchMethodError) {}
-          }
-        },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
         shape: CircularNotchedRectangle(),
         child: Container(
-          height: 50,
+          height: 65,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

@@ -18,10 +18,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
           scaffoldBackgroundColor: Palette.scaffold),
-      home: ShowCaseWidget(
-          builder: Builder(
-        builder: (context) => HomeScreen(),
-      )),
+      home: HomeScreen(),
     );
   }
 }
