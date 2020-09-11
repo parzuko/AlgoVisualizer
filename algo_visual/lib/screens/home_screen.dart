@@ -33,6 +33,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   // Insertion Sort
   insertion() async {
     setState(() {
+      play_pause
+          ? _animationController.reverse()
+          : _animationController.forward();
+      play_pause = !play_pause;
+    });
+    setState(() {
       isSelected = false;
     });
     for (int i = 1; i < _array.length; i++) {
@@ -50,10 +56,22 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     setState(() {
       isSelected = true;
     });
+    setState(() {
+      play_pause
+          ? _animationController.reverse()
+          : _animationController.forward();
+      play_pause = !play_pause;
+    });
   }
 
   // Selection Sort
   selection() async {
+    setState(() {
+      play_pause
+          ? _animationController.reverse()
+          : _animationController.forward();
+      play_pause = !play_pause;
+    });
     setState(() {
       isSelected = false;
     });
@@ -72,6 +90,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     }
     setState(() {
       isSelected = true;
+    });
+    setState(() {
+      play_pause
+          ? _animationController.reverse()
+          : _animationController.forward();
+      play_pause = !play_pause;
     });
   }
 
@@ -96,6 +120,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   // Quick Sort
   quickSort(List arr, int low, int high) async {
     setState(() {
+      play_pause
+          ? _animationController.reverse()
+          : _animationController.forward();
+      play_pause = !play_pause;
+    });
+    setState(() {
       isSelected = false;
     });
     if (low < high) {
@@ -109,10 +139,22 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     setState(() {
       isSelected = true;
     });
+    setState(() {
+      play_pause
+          ? _animationController.reverse()
+          : _animationController.forward();
+      play_pause = !play_pause;
+    });
   }
 
   // Bubble Sort
   bubble() async {
+    setState(() {
+      play_pause
+          ? _animationController.reverse()
+          : _animationController.forward();
+      play_pause = !play_pause;
+    });
     setState(() {
       isSelected = false;
     });
@@ -129,6 +171,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     }
     setState(() {
       isSelected = true;
+    });
+    setState(() {
+      play_pause
+          ? _animationController.reverse()
+          : _animationController.forward();
+      play_pause = !play_pause;
     });
   }
 
@@ -485,144 +533,132 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         maxChildSize: containerHeight,
         builder: (context, controller) {
           return Container(
-              decoration: BoxDecoration(color: Palette.textColor),
-              child: ListView.builder(
-                itemCount: 1,
-                controller: controller,
-                itemBuilder: (BuildContext context, index) {
-                  return Column(
-                    children: [
-                      BottomAppBar(
-                        color: Palette.theButton,
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              AnimatedIconButton(
-                                //animationController: _animationController,
-                                size: 30,
-                                onPressed: () {
-                                  print("button with color pressed");
-                                },
-                                duration: Duration(milliseconds: 200),
-                                endIcon: Icon(
-                                  Icons.arrow_downward,
+            decoration: BoxDecoration(color: Palette.textColor),
+            child: ListView.builder(
+              itemCount: 1,
+              controller: controller,
+              itemBuilder: (BuildContext context, index) {
+                return Column(
+                  children: [
+                    BottomAppBar(
+                      color: Palette.theButton,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            AnimatedIconButton(
+                              animationController: _animationController,
+                              size: 30,
+                              onPressed: () {},
+                              startIcon: Icon(
+                                Icons.arrow_downward,
+                                color: Palette.textColor,
+                              ),
+                              endIcon: Icon(
+                                Icons.arrow_forward,
+                                color: Palette.textColor,
+                              ),
+                            ),
+                            FlatButton(
+                              onPressed: () {
+                                if (currentSortingMethod == "Bubble Sort") {
+                                  try {
+                                    sort("BUBBLE SORT");
+                                  } catch (NoSuchMethodError) {}
+                                } else if (currentSortingMethod ==
+                                    "Selection Sort") {
+                                  try {
+                                    sort("SELECTION SORT");
+                                  } catch (NoSuchMethodError) {}
+                                } else if (currentSortingMethod ==
+                                    "Insertion Sort") {
+                                  try {
+                                    sort("INSERTION SORT");
+                                  } catch (NoSuchMethodError) {}
+                                } else {
+                                  try {
+                                    sort("QUICK SORT");
+                                  } catch (NoSuchMethodError) {}
+                                }
+                              },
+                              child: Text(
+                                currentSortingMethod,
+                                style: TextStyle(
                                   color: Palette.textColor,
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 1,
+                                  fontFamily: 'Segoe UI',
                                 ),
-                                startIcon: Icon(
-                                  Icons.arrow_forward,
+                              ),
+                            ),
+                            SizedBox(width: screenWidth / 5),
+                            Row(
+                              children: [
+                                AnimatedIconButton(
+                                  duration: Duration(milliseconds: 500),
+                                  padding: EdgeInsets.fromLTRB(0.5, 0, 0, 0),
+                                  startIcon: Icon(
+                                    Icons.cached,
+                                    color: Palette.textColor,
+                                  ),
+                                  endIcon: Icon(
+                                    Icons.autorenew,
+                                    color: Palette.textColor,
+                                  ),
+                                  size: 30.0,
+                                  onPressed: () {
+                                    if (isSelected) {
+                                      _shuffle();
+                                    } else {
+                                      showToast(
+                                        "$currentSortingMethod In Process.",
+                                        gravity: Toastie.bottom,
+                                        duration: Toastie.lengthLong,
+                                      );
+                                    }
+                                  },
+                                ),
+                                IconButton(
+                                  icon: Icon(Icons.settings),
+                                  iconSize: 30.0,
                                   color: Palette.textColor,
+                                  onPressed: () {
+                                    if (isSelected) {
+                                      showSettingsPage();
+                                    } else {
+                                      showToast(
+                                        "$currentSortingMethod In Process.",
+                                        gravity: Toastie.bottom,
+                                        duration: Toastie.lengthLong,
+                                      );
+                                    }
+                                  },
                                 ),
-                              ),
-                              FlatButton(
-                                onPressed: () {
-                                  if (currentSortingMethod == "Bubble Sort") {
-                                    try {
-                                      sort("BUBBLE SORT");
-                                    } catch (NoSuchMethodError) {}
-                                  } else if (currentSortingMethod ==
-                                      "Selection Sort") {
-                                    try {
-                                      sort("SELECTION SORT");
-                                    } catch (NoSuchMethodError) {}
-                                  } else if (currentSortingMethod ==
-                                      "Insertion Sort") {
-                                    try {
-                                      sort("INSERTION SORT");
-                                    } catch (NoSuchMethodError) {}
-                                  } else {
-                                    try {
-                                      sort("QUICK SORT");
-                                    } catch (NoSuchMethodError) {}
-                                  }
-                                },
-                                child: Text(
-                                  currentSortingMethod,
-                                  style: TextStyle(
-                                    color: Palette.textColor,
-                                    fontSize: 18.0,
-                                    fontWeight: FontWeight.bold,
-                                    letterSpacing: 1,
-                                    fontFamily: 'Segoe UI',
-                                  ),
-                                ),
-                              ),
-                              SizedBox(width: screenWidth / 5),
-                              Row(
-                                children: [
-                                  AnimatedIconButton(
-                                    duration: Duration(milliseconds: 500),
-                                    padding: EdgeInsets.fromLTRB(0.5, 0, 0, 0),
-                                    startIcon: Icon(
-                                      Icons.cached,
-                                      color: Palette.textColor,
-                                    ),
-                                    endIcon: Icon(
-                                      Icons.autorenew,
-                                      color: Palette.textColor,
-                                    ),
-                                    size: 30.0,
-                                    onPressed: () {
-                                      if (isSelected) {
-                                        _shuffle();
-                                        setState(() {
-                                          play_pause
-                                              ? _animationController.reverse()
-                                              : _animationController.forward();
-                                          play_pause = !play_pause;
-                                        });
-                                      } else {
-                                        showToast(
-                                          "$currentSortingMethod In Process.",
-                                          gravity: Toastie.bottom,
-                                          duration: Toastie.lengthLong,
-                                        );
-                                      }
-                                    },
-                                  ),
-                                  IconButton(
-                                    icon: Icon(Icons.settings),
-                                    iconSize: 30.0,
-                                    color: Palette.textColor,
-                                    onPressed: () {
-                                      if (isSelected) {
-                                        showSettingsPage();
-                                      } else {
-                                        showToast(
-                                          "$currentSortingMethod In Process.",
-                                          gravity: Toastie.bottom,
-                                          duration: Toastie.lengthLong,
-                                        );
-                                      }
-                                    },
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
+                              ],
+                            ),
+                          ],
                         ),
                       ),
-                      Container(
-                        height: 400,
-                        color: Palette.scaffold,
-                        child: Container(
-                          child: showBottomNavigationMenu(),
-                          decoration: BoxDecoration(
-                            color: Palette.textColor,
-                            // borderRadius: BorderRadius.only(
-                            //   topLeft: const Radius.circular(10),
-                            //   topRight: const Radius.circular(10),
-                            // ),
-                          ),
+                    ),
+                    Container(
+                      height: 400,
+                      color: Palette.scaffold,
+                      child: Container(
+                        child: showBottomNavigationMenu(),
+                        decoration: BoxDecoration(
+                          color: Palette.textColor,
                         ),
                       ),
-                    ],
-                  );
-                },
-              ));
+                    ),
+                  ],
+                );
+              },
+            ),
+          );
         },
       ),
     );
