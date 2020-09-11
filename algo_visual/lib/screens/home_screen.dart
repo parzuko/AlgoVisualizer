@@ -552,7 +552,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                             AnimatedIconButton(
                               animationController: _animationController,
                               size: 30,
-                              onPressed: () {},
+                              onPressed: () {
+                                showToast(
+                                  "Scroll Up For More Options.",
+                                  gravity: Toastie.bottom,
+                                  duration: Toastie.lengthLong,
+                                );
+                              },
                               startIcon: Icon(
                                 Icons.arrow_downward,
                                 color: Palette.textColor,
