@@ -6,6 +6,7 @@ import 'package:algo_visual/config/numbers.dart';
 import 'package:algo_visual/config/palette.dart';
 import 'package:algo_visual/config/toastie.dart';
 import 'package:algo_visual/screens/settings.dart';
+import 'package:animated_icon_button/animated_icon_button.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -13,8 +14,10 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 ////////////////////////////GLBOAL VARIABLES/////////////////////////
+  AnimationController _animationController;
+  bool play_pause = false;
   List<int> _array = [];
   String currentSortingMethod = "Selection Sort";
   double _sizeOfArray = 500;
@@ -420,6 +423,11 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    _animationController = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 750),
+      reverseDuration: Duration(milliseconds: 750),
+    );
     _streamController = StreamController<List<int>>();
     _stream = _streamController.stream;
 
@@ -493,6 +501,22 @@ class _HomeScreenState extends State<HomeScreen> {
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
+                              AnimatedIconButton(
+                                //animationController: _animationController,
+                                size: 30,
+                                onPressed: () {
+                                  print("button with color pressed");
+                                },
+                                duration: Duration(milliseconds: 200),
+                                endIcon: Icon(
+                                  Icons.arrow_downward,
+                                  color: Palette.textColor,
+                                ),
+                                startIcon: Icon(
+                                  Icons.arrow_forward,
+                                  color: Palette.textColor,
+                                ),
+                              ),
                               FlatButton(
                                 onPressed: () {
                                   if (currentSortingMethod == "Bubble Sort") {
@@ -526,7 +550,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                 ),
                               ),
-                              SizedBox(width: screenWidth / 3),
+                              SizedBox(width: screenWidth / 5),
                               Row(
                                 children: [
                                   IconButton(
@@ -537,6 +561,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                     onPressed: () {
                                       if (isSelected) {
                                         _shuffle();
+                                        setState(() {
+                                          play_pause
+                                              ? _animationController.reverse()
+                                              : _animationController.forward();
+                                          play_pause = !play_pause;
+                                        });
                                       } else {
                                         showToast(
                                           "$currentSortingMethod In Process.",

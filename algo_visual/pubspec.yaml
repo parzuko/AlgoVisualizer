@@ -24,6 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^0.1.3
+  animated_icon_button: ^0.3.0
 
 
 dev_dependencies:
