@@ -205,9 +205,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   Column showBottomNavigationMenu() {
     return Column(
       children: [
-        SizedBox(
-          height: 6,
-        ),
         Text(
           "Mode",
           style: TextStyle(
@@ -447,6 +444,34 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     );
   }
 
+  void showMenu() {
+    showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return Container(
+            decoration: BoxDecoration(color: Palette.textColor),
+            child: ListView.builder(
+              itemCount: 1,
+              itemBuilder: (BuildContext context, index) {
+                return Column(
+                  children: [
+                    Container(
+                      color: Palette.scaffold,
+                      child: Container(
+                        child: showBottomNavigationMenu(),
+                        decoration: BoxDecoration(
+                          color: Palette.textColor,
+                        ),
+                      ),
+                    ),
+                  ],
+                );
+              },
+            ),
+          );
+        });
+  }
+
   void selectSortingMethod(String methodName) {
     setState(() {
       currentSortingMethod = methodName;
@@ -565,47 +590,60 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         child: Container(
           height: 50,
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: <Widget>[
-              AnimatedIconButton(
-                duration: Duration(milliseconds: 500),
-                padding: EdgeInsets.fromLTRB(0.5, 0, 0, 0),
-                startIcon: Icon(
-                  Icons.cached,
-                  color: Palette.textColor,
-                ),
-                endIcon: Icon(
-                  Icons.autorenew,
-                  color: Palette.textColor,
-                ),
-                size: 30.0,
-                onPressed: () {
-                  if (isSelected) {
-                    _shuffle();
-                  } else {
-                    showToast(
-                      "$currentSortingMethod In Process.",
-                      gravity: Toastie.bottom,
-                      duration: Toastie.lengthLong,
-                    );
-                  }
-                },
-              ),
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
               IconButton(
-                icon: Icon(Icons.settings),
-                iconSize: 30.0,
-                color: Palette.textColor,
-                onPressed: () {
-                  if (isSelected) {
-                    showSettingsPage();
-                  } else {
-                    showToast(
-                      "$currentSortingMethod In Process.",
-                      gravity: Toastie.bottom,
-                      duration: Toastie.lengthLong,
-                    );
-                  }
-                },
+                onPressed: () => showMenu(),
+                icon: Icon(
+                  Icons.arrow_drop_up,
+                  color: Palette.textColor,
+                  size: 30,
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  AnimatedIconButton(
+                    duration: Duration(milliseconds: 500),
+                    padding: EdgeInsets.fromLTRB(0.5, 0, 0, 0),
+                    startIcon: Icon(
+                      Icons.cached,
+                      color: Palette.textColor,
+                    ),
+                    endIcon: Icon(
+                      Icons.autorenew,
+                      color: Palette.textColor,
+                    ),
+                    size: 30.0,
+                    onPressed: () {
+                      if (isSelected) {
+                        _shuffle();
+                      } else {
+                        showToast(
+                          "$currentSortingMethod In Process.",
+                          gravity: Toastie.bottom,
+                          duration: Toastie.lengthLong,
+                        );
+                      }
+                    },
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.settings),
+                    iconSize: 30.0,
+                    color: Palette.textColor,
+                    onPressed: () {
+                      if (isSelected) {
+                        showSettingsPage();
+                      } else {
+                        showToast(
+                          "$currentSortingMethod In Process.",
+                          gravity: Toastie.bottom,
+                          duration: Toastie.lengthLong,
+                        );
+                      }
+                    },
+                  ),
+                ],
               ),
             ],
           ),
