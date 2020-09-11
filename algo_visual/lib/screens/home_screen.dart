@@ -415,6 +415,37 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         child: Container(
                           child: Column(
                             children: [
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "Current Sorting Method: ",
+                                    style: TextStyle(
+                                      color: Palette.brightText,
+                                      fontSize: 15.0,
+                                      fontWeight: FontWeight.bold,
+                                      letterSpacing: 0.7,
+                                      fontFamily: 'Segoe UI',
+                                    ),
+                                  ),
+                                  Text(
+                                    currentSortingMethod,
+                                    style: TextStyle(
+                                      color: Palette.scaffold,
+                                      fontSize: 15.0,
+                                      fontWeight: FontWeight.bold,
+                                      letterSpacing: 0.7,
+                                      fontFamily: 'Segoe UI',
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
                               Text(
                                 "Mode",
                                 style: TextStyle(
@@ -425,7 +456,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                     fontFamily: 'Segoe UI'),
                               ),
                               SizedBox(
-                                height: 5,
+                                height: 10,
                               ),
                               SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
@@ -688,11 +719,18 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                       highlightText[3] = !highlightText[3]);
                                 },
                               ),
+                              Divider(
+                                height: 10,
+                              ),
+                              SizedBox(height: 20),
                             ],
                           ),
                           decoration: BoxDecoration(
-                            color: Palette.textColor,
-                          ),
+                              color: Palette.textColor,
+                              borderRadius: BorderRadius.only(
+                                topLeft: const Radius.circular(25),
+                                topRight: const Radius.circular(25),
+                              )),
                         ),
                       ),
                     ],
@@ -791,12 +829,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             );
           }),
       floatingActionButton: Container(
-        height: screenWidth * 0.2,
-        width: screenWidth * 0.2,
+        height: screenWidth * 0.16,
+        width: screenWidth * 0.16,
         child: FloatingActionButton(
           child: Icon(
             Icons.show_chart,
-            size: 40,
+            size: 45,
           ),
           backgroundColor: Palette.brightText,
           onPressed: () {
@@ -829,9 +867,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               IconButton(
+                padding: EdgeInsets.fromLTRB(25, 0, 0, 0),
                 onPressed: () => showMenu(),
                 icon: Icon(
-                  Icons.arrow_drop_up,
+                  Icons.format_list_bulleted,
                   color: Palette.textColor,
                   size: 30,
                 ),
@@ -864,6 +903,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     },
                   ),
                   IconButton(
+                    padding: EdgeInsets.fromLTRB(10, 0, 25, 0),
                     icon: Icon(Icons.settings),
                     iconSize: 30.0,
                     color: Palette.textColor,
