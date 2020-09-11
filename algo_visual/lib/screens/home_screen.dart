@@ -553,11 +553,18 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                               SizedBox(width: screenWidth / 5),
                               Row(
                                 children: [
-                                  IconButton(
+                                  AnimatedIconButton(
+                                    duration: Duration(milliseconds: 500),
                                     padding: EdgeInsets.fromLTRB(0.5, 0, 0, 0),
-                                    icon: Icon(Icons.cached),
-                                    iconSize: 30.0,
-                                    color: Palette.textColor,
+                                    startIcon: Icon(
+                                      Icons.cached,
+                                      color: Palette.textColor,
+                                    ),
+                                    endIcon: Icon(
+                                      Icons.autorenew,
+                                      color: Palette.textColor,
+                                    ),
+                                    size: 30.0,
                                     onPressed: () {
                                       if (isSelected) {
                                         _shuffle();
