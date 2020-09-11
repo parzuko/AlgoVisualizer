@@ -406,7 +406,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               itemBuilder: (BuildContext context, index) {
                 return StatefulBuilder(builder: (
                   BuildContext context,
-                  StateSetter setState,
+                  StateSetter setModalState,
                 ) {
                   return Column(
                     children: [
@@ -467,17 +467,15 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                     FlatButton(
                                       onPressed: () {
                                         setState(() {
-                                          setState(() {
-                                            mode = modes["Frenzy"];
-                                            for (var each = 0;
-                                                each < highlightMode.length;
-                                                each++) {
-                                              highlightMode[each] = false;
-                                            }
-                                          });
-                                          setState(() => highlightMode[0] =
-                                              !highlightMode[0]);
+                                          mode = modes["Frenzy"];
+                                          for (var each = 0;
+                                              each < highlightMode.length;
+                                              each++) {
+                                            highlightMode[each] = false;
+                                          }
                                         });
+                                        setModalState(() => highlightMode[0] =
+                                            !highlightMode[0]);
                                       },
                                       child: Text(
                                         "Frenzy Mode",
@@ -501,7 +499,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                             highlightMode[each] = false;
                                           }
                                         });
-                                        setState(() => highlightMode[1] =
+                                        setModalState(() => highlightMode[1] =
                                             !highlightMode[1]);
                                       },
                                       child: Text(
@@ -526,7 +524,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                             highlightMode[each] = false;
                                           }
                                         });
-                                        setState(() => highlightMode[2] =
+                                        setModalState(() => highlightMode[2] =
                                             !highlightMode[2]);
                                       },
                                       child: Text(
@@ -586,7 +584,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                       highlightText[each] = false;
                                     }
                                   });
-                                  setState(() =>
+                                  setModalState(() =>
                                       highlightText[0] = !highlightText[0]);
                                 },
                               ),
@@ -629,7 +627,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                       highlightText[each] = false;
                                     }
                                   });
-                                  setState(() =>
+                                  setModalState(() =>
                                       highlightText[1] = !highlightText[1]);
                                 },
                               ),
@@ -672,7 +670,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                       highlightText[each] = false;
                                     }
                                   });
-                                  setState(() =>
+                                  setModalState(() =>
                                       highlightText[2] = !highlightText[2]);
                                 },
                               ),
@@ -715,7 +713,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                       highlightText[each] = false;
                                     }
                                   });
-                                  setState(() =>
+                                  setModalState(() =>
                                       highlightText[3] = !highlightText[3]);
                                 },
                               ),
