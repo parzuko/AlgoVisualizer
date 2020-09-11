@@ -1,5 +1,6 @@
 import 'package:algo_visual/config/palette.dart';
 import 'package:flutter/material.dart';
+import 'package:showcaseview/showcaseview.dart';
 
 import 'screens/screens.dart';
 
@@ -17,7 +18,10 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
           scaffoldBackgroundColor: Palette.scaffold),
-      home: HomeScreen(),
+      home: ShowCaseWidget(
+          builder: Builder(
+        builder: (context) => HomeScreen(),
+      )),
     );
   }
 }

@@ -28,6 +28,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   var highlightText = [false, true, false, false];
   var theThemes = [true, false, false, false, false];
   var highlightMode = [false, true, false];
+
 ////////////////////////////SORTING METHODS/////////////////////////
 
   // Insertion Sort
@@ -204,6 +205,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   Column showBottomNavigationMenu() {
     return Column(
       children: [
+        SizedBox(
+          height: 6,
+        ),
         Text(
           "Mode",
           style: TextStyle(
@@ -212,6 +216,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               fontWeight: FontWeight.bold,
               letterSpacing: 1,
               fontFamily: 'Segoe UI'),
+        ),
+        SizedBox(
+          height: 5,
         ),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
@@ -441,7 +448,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
   void selectSortingMethod(String methodName) {
-    //Navigator.pop(context);
     setState(() {
       currentSortingMethod = methodName;
     });
@@ -527,7 +533,91 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               ],
             );
           }),
-      bottomNavigationBar: DraggableScrollableSheet(
+      floatingActionButton: FloatingActionButton(
+        child: Icon(
+          Icons.show_chart,
+          size: 30,
+        ),
+        backgroundColor: Palette.brightText,
+        onPressed: () {
+          if (currentSortingMethod == "Bubble Sort") {
+            try {
+              sort("BUBBLE SORT");
+            } catch (NoSuchMethodError) {}
+          } else if (currentSortingMethod == "Selection Sort") {
+            try {
+              sort("SELECTION SORT");
+            } catch (NoSuchMethodError) {}
+          } else if (currentSortingMethod == "Insertion Sort") {
+            try {
+              sort("INSERTION SORT");
+            } catch (NoSuchMethodError) {}
+          } else {
+            try {
+              sort("QUICK SORT");
+            } catch (NoSuchMethodError) {}
+          }
+        },
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: BottomAppBar(
+        shape: CircularNotchedRectangle(),
+        child: Container(
+          height: 50,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+              AnimatedIconButton(
+                duration: Duration(milliseconds: 500),
+                padding: EdgeInsets.fromLTRB(0.5, 0, 0, 0),
+                startIcon: Icon(
+                  Icons.cached,
+                  color: Palette.textColor,
+                ),
+                endIcon: Icon(
+                  Icons.autorenew,
+                  color: Palette.textColor,
+                ),
+                size: 30.0,
+                onPressed: () {
+                  if (isSelected) {
+                    _shuffle();
+                  } else {
+                    showToast(
+                      "$currentSortingMethod In Process.",
+                      gravity: Toastie.bottom,
+                      duration: Toastie.lengthLong,
+                    );
+                  }
+                },
+              ),
+              IconButton(
+                icon: Icon(Icons.settings),
+                iconSize: 30.0,
+                color: Palette.textColor,
+                onPressed: () {
+                  if (isSelected) {
+                    showSettingsPage();
+                  } else {
+                    showToast(
+                      "$currentSortingMethod In Process.",
+                      gravity: Toastie.bottom,
+                      duration: Toastie.lengthLong,
+                    );
+                  }
+                },
+              ),
+            ],
+          ),
+        ),
+        color: Palette.theButton,
+      ),
+    );
+  }
+}
+
+/**
+ * DraggableScrollableSheet(
         initialChildSize: ratioHeight,
         minChildSize: ratioHeight,
         maxChildSize: containerHeight,
@@ -560,7 +650,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                 );
                               },
                               startIcon: Icon(
-                                Icons.arrow_downward,
+                                Icons.menu,
                                 color: Palette.textColor,
                               ),
                               endIcon: Icon(
@@ -667,6 +757,4 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           );
         },
       ),
-    );
-  }
-}
+ */
