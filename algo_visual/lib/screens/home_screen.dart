@@ -418,34 +418,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                               SizedBox(
                                 height: 10,
                               ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "Current Sorting Method: ",
-                                    style: TextStyle(
-                                      color: Palette.brightText,
-                                      fontSize: 15.0,
-                                      fontWeight: FontWeight.bold,
-                                      letterSpacing: 0.7,
-                                      fontFamily: 'Segoe UI',
-                                    ),
-                                  ),
-                                  Text(
-                                    currentSortingMethod,
-                                    style: TextStyle(
-                                      color: Palette.scaffold,
-                                      fontSize: 15.0,
-                                      fontWeight: FontWeight.bold,
-                                      letterSpacing: 0.7,
-                                      fontFamily: 'Segoe UI',
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
                               Text(
                                 "Mode",
                                 style: TextStyle(
@@ -807,6 +779,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           builder: (context, snapshot) {
             int counter = 0;
             return Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Row(
                   children: _array.map((int item) {
@@ -822,6 +795,39 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       ),
                     );
                   }).toList(),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 100),
+                  child: Container(
+                    height: 50,
+                    color: Palette.textColor,
+                    width: screenWidth - 100,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Current Sorting Method: ",
+                          style: TextStyle(
+                            color: Palette.brightText,
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 0.7,
+                            fontFamily: 'Segoe UI',
+                          ),
+                        ),
+                        Text(
+                          currentSortingMethod,
+                          style: TextStyle(
+                            color: Palette.scaffold,
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 0.7,
+                            fontFamily: 'Segoe UI',
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ],
             );
