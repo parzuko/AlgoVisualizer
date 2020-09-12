@@ -427,9 +427,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                     letterSpacing: 1,
                                     fontFamily: 'Segoe UI'),
                               ),
-                              SizedBox(
-                                height: 10,
-                              ),
                               SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
                                 child: Row(
@@ -693,14 +690,26 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                 height: 10,
                               ),
                               SizedBox(height: 20),
+                              FlatButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Text(
+                                  "Done",
+                                  style: TextStyle(
+                                    color: Palette.scaffold,
+                                    fontSize: 15.0,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 0.7,
+                                    fontFamily: 'Segoe UI',
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
                           decoration: BoxDecoration(
-                              color: Palette.textColor,
-                              borderRadius: BorderRadius.only(
-                                topLeft: const Radius.circular(25),
-                                topRight: const Radius.circular(25),
-                              )),
+                            color: Palette.textColor,
+                          ),
                         ),
                       ),
                     ],
