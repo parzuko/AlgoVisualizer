@@ -1,6 +1,5 @@
 import 'package:algo_visual/config/palette.dart';
 import 'package:flutter/material.dart';
-import 'package:showcaseview/showcaseview.dart';
 
 import 'screens/screens.dart';
 

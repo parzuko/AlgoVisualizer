@@ -796,39 +796,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     );
                   }).toList(),
                 ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 100),
-                  child: Container(
-                    height: 50,
-                    color: Palette.textColor,
-                    width: screenWidth - 100,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Current Sorting Method: ",
-                          style: TextStyle(
-                            color: Palette.brightText,
-                            fontSize: 15.0,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 0.7,
-                            fontFamily: 'Segoe UI',
-                          ),
-                        ),
-                        Text(
-                          currentSortingMethod,
-                          style: TextStyle(
-                            color: Palette.scaffold,
-                            fontSize: 15.0,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 0.7,
-                            fontFamily: 'Segoe UI',
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
               ],
             );
           }),
