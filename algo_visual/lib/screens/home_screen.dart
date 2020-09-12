@@ -25,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   Stream<List<int>> _stream;
   int color = 1;
   bool isSelected = true;
-  var highlightText = [false, true, false, false];
+  var highlightText = [false, true, false, false, false];
   var theThemes = [true, false, false, false, false];
   var highlightMode = [false, true, false];
 ////////////////////////////SORTING METHODS/////////////////////////
@@ -70,6 +70,64 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       await Future.delayed(Duration(microseconds: 1000));
       _streamController.add(_array);
     }
+    setState(() {
+      isSelected = true;
+    });
+  }
+
+  void merge(List list, int leftIndex, int middleIndex, int rightIndex) {
+    int leftSize = middleIndex - leftIndex + 1;
+    int rightSize = rightIndex - middleIndex;
+
+    List leftList = new List(leftSize);
+    List rightList = new List(rightSize);
+
+    for (int i = 0; i < leftSize; i++) leftList[i] = list[leftIndex + i];
+    for (int j = 0; j < rightSize; j++)
+      rightList[j] = list[middleIndex + j + 1];
+
+    int i = 0, j = 0;
+    int k = leftIndex;
+
+    while (i < leftSize && j < rightSize) {
+      if (leftList[i] <= rightList[j]) {
+        list[k] = leftList[i];
+        i++;
+      } else {
+        list[k] = rightList[j];
+        j++;
+      }
+      k++;
+    }
+
+    while (i < leftSize) {
+      list[k] = leftList[i];
+      i++;
+      k++;
+    }
+
+    while (j < rightSize) {
+      list[k] = rightList[j];
+      j++;
+      k++;
+    }
+  }
+
+  void mergeSort(List list, int leftIndex, int rightIndex) async {
+    setState(() {
+      isSelected = false;
+    });
+    if (leftIndex < rightIndex) {
+      int middleIndex = (rightIndex + leftIndex) ~/ 2;
+
+      await Future.delayed(Duration(microseconds: 1000));
+      mergeSort(list, leftIndex, middleIndex);
+      mergeSort(list, middleIndex + 1, rightIndex);
+      merge(list, leftIndex, middleIndex, rightIndex);
+
+      //print("dobe");
+    }
+    _streamController.add(_array);
     setState(() {
       isSelected = true;
     });
@@ -686,6 +744,49 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                       highlightText[3] = !highlightText[3]);
                                 },
                               ),
+                              ListTile(
+                                leading: Icon(
+                                  Icons.merge_type,
+                                  color: Palette.scaffold,
+                                  size: 35,
+                                ),
+                                trailing: Text(
+                                  "Best Time Complexity O(nlogn)",
+                                  style: TextStyle(
+                                    color: highlightText[4]
+                                        ? Palette.scaffold
+                                        : Palette.textColor,
+                                    fontSize: 13.0,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 0.7,
+                                    fontFamily: 'Segoe UI',
+                                  ),
+                                ),
+                                title: Text(
+                                  "Merge Sort",
+                                  style: TextStyle(
+                                    color: highlightText[4]
+                                        ? Palette.theButton
+                                        : Palette.brightText,
+                                    fontSize: 15.0,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 0.7,
+                                    fontFamily: 'Segoe UI',
+                                  ),
+                                ),
+                                onTap: () {
+                                  selectSortingMethod("Merge Sort");
+                                  setState(() {
+                                    for (var each = 0;
+                                        each < highlightText.length;
+                                        each++) {
+                                      highlightText[each] = false;
+                                    }
+                                  });
+                                  setModalState(() =>
+                                      highlightText[4] = !highlightText[4]);
+                                },
+                              ),
                               Divider(
                                 height: 10,
                               ),
@@ -775,6 +876,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           quickSort(_array, 0, _array.length - 1);
         } else if (method == "INSERTION SORT") {
           insertion();
+        } else if (method == "MERGE SORT") {
+          mergeSort(_array, 0, _array.length - 1);
         }
       };
     }
@@ -830,9 +933,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               try {
                 sort("INSERTION SORT");
               } catch (NoSuchMethodError) {}
-            } else {
+            } else if (currentSortingMethod == "Quick Sort") {
               try {
                 sort("QUICK SORT");
+              } catch (NoSuchMethodError) {}
+            } else if (currentSortingMethod == "Merge Sort") {
+              try {
+                sort("MERGE SORT");
               } catch (NoSuchMethodError) {}
             }
           },
