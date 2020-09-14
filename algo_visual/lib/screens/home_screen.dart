@@ -75,62 +75,57 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     });
   }
 
-  void merge(List list, int leftIndex, int middleIndex, int rightIndex) {
-    int leftSize = middleIndex - leftIndex + 1;
-    int rightSize = rightIndex - middleIndex;
+  void heapify(List list, int n, int i) {
+    int largest = i;
+    int l = 2 * i + 1;
+    int r = 2 * i + 2;
 
-    List leftList = new List(leftSize);
-    List rightList = new List(rightSize);
-
-    for (int i = 0; i < leftSize; i++) leftList[i] = list[leftIndex + i];
-    for (int j = 0; j < rightSize; j++)
-      rightList[j] = list[middleIndex + j + 1];
-
-    int i = 0, j = 0;
-    int k = leftIndex;
-
-    while (i < leftSize && j < rightSize) {
-      if (leftList[i] <= rightList[j]) {
-        list[k] = leftList[i];
-        i++;
-      } else {
-        list[k] = rightList[j];
-        j++;
-      }
-      k++;
+    if (l < n && list[l] > list[largest]) {
+      largest = l;
     }
 
-    while (i < leftSize) {
-      list[k] = leftList[i];
-      i++;
-      k++;
+    if (r < n && list[r] > list[largest]) {
+      largest = r;
     }
 
-    while (j < rightSize) {
-      list[k] = rightList[j];
-      j++;
-      k++;
+    if (largest != i) {
+      swapList(list, i, largest);
+      heapify(list, n, largest);
     }
   }
 
-  void mergeSort(List list, int leftIndex, int rightIndex) async {
+  void swapList(List list, int i, int largest) {
+    int swap = list[i];
+    list[i] = list[largest];
+    list[largest] = swap;
+  }
+
+  void heapSort(List list) async {
     setState(() {
       isSelected = false;
     });
-    if (leftIndex < rightIndex) {
-      int middleIndex = (rightIndex + leftIndex) ~/ 2;
-
-      await Future.delayed(Duration(microseconds: 1000));
-      mergeSort(list, leftIndex, middleIndex);
-      mergeSort(list, middleIndex + 1, rightIndex);
-      merge(list, leftIndex, middleIndex, rightIndex);
-
-      //print("dobe");
+    int n = list.length;
+    for (int i = (n ~/ 2); i >= 0; i--) {
+      await Future.delayed(Duration(microseconds: 9000));
+      heapify(list, n, i);
+      _streamController.add(_array);
     }
-    _streamController.add(_array);
+
+    for (int i = n - 1; i >= 0; i--) {
+      swap(list, i);
+      await Future.delayed(Duration(microseconds: 9000));
+      heapify(list, i, 0);
+      _streamController.add(_array);
+    }
     setState(() {
       isSelected = true;
     });
+  }
+
+  void swap(List list, int i) {
+    int temp = list[0];
+    list[0] = list[i];
+    list[i] = temp;
   }
 
   // Partition Method For Quick Sort
@@ -746,7 +741,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                               ),
                               ListTile(
                                 leading: Icon(
-                                  Icons.merge_type,
+                                  Icons.view_module,
                                   color: Palette.scaffold,
                                   size: 35,
                                 ),
@@ -763,7 +758,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                   ),
                                 ),
                                 title: Text(
-                                  "Merge Sort",
+                                  "Heap Sort",
                                   style: TextStyle(
                                     color: highlightText[4]
                                         ? Palette.theButton
@@ -775,7 +770,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                   ),
                                 ),
                                 onTap: () {
-                                  selectSortingMethod("Merge Sort");
+                                  selectSortingMethod("Heap Sort");
                                   setState(() {
                                     for (var each = 0;
                                         each < highlightText.length;
@@ -876,8 +871,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           quickSort(_array, 0, _array.length - 1);
         } else if (method == "INSERTION SORT") {
           insertion();
-        } else if (method == "MERGE SORT") {
-          mergeSort(_array, 0, _array.length - 1);
+        } else if (method == "HEAP SORT") {
+          heapSort(_array);
         }
       };
     }
@@ -937,9 +932,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               try {
                 sort("QUICK SORT");
               } catch (NoSuchMethodError) {}
-            } else if (currentSortingMethod == "Merge Sort") {
+            } else if (currentSortingMethod == "Heap Sort") {
               try {
-                sort("MERGE SORT");
+                sort("HEAP SORT");
               } catch (NoSuchMethodError) {}
             }
           },
