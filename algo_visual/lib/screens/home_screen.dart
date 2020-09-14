@@ -25,10 +25,42 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   Stream<List<int>> _stream;
   int color = 1;
   bool isSelected = true;
-  var highlightText = [false, true, false, false, false, false];
+  var highlightText = [false, true, false, false, false, false, false];
   var theThemes = [true, false, false, false, false];
   var highlightMode = [false, true, false];
 ////////////////////////////SORTING METHODS/////////////////////////
+
+  void gnomeSort(List list) async {
+    setState(() {
+      isSelected = false;
+    });
+    int length = list.length;
+    if (list == null || length == 0) return;
+    int first = 1;
+    int second = 2;
+
+    while (first < length) {
+      if (list[first - 1] <= list[first]) {
+        first = second;
+        second++;
+      } else {
+        int temp = list[first - 1];
+        list[first - 1] = list[first];
+        list[first] = temp;
+        first -= 1;
+
+        if (first == 0) {
+          first = 1;
+          second = 2;
+        }
+      }
+      await Future.delayed(Duration(microseconds: 800));
+      _streamController.add(_array);
+    }
+    setState(() {
+      isSelected = true;
+    });
+  }
 
   // Insertion Sort
   insertion() async {
@@ -866,6 +898,49 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                       highlightText[5] = !highlightText[5]);
                                 },
                               ),
+                              ListTile(
+                                leading: Icon(
+                                  Icons.accessibility_new,
+                                  color: Palette.scaffold,
+                                  size: 35,
+                                ),
+                                trailing: Text(
+                                  "Best Time Complexity O(n)",
+                                  style: TextStyle(
+                                    color: highlightText[6]
+                                        ? Palette.scaffold
+                                        : Palette.textColor,
+                                    fontSize: 13.0,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 0.7,
+                                    fontFamily: 'Segoe UI',
+                                  ),
+                                ),
+                                title: Text(
+                                  "Gnome Sort",
+                                  style: TextStyle(
+                                    color: highlightText[6]
+                                        ? Palette.theButton
+                                        : Palette.brightText,
+                                    fontSize: 15.0,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 0.7,
+                                    fontFamily: 'Segoe UI',
+                                  ),
+                                ),
+                                onTap: () {
+                                  selectSortingMethod("Gnome Sort");
+                                  setState(() {
+                                    for (var each = 0;
+                                        each < highlightText.length;
+                                        each++) {
+                                      highlightText[each] = false;
+                                    }
+                                  });
+                                  setModalState(() =>
+                                      highlightText[6] = !highlightText[6]);
+                                },
+                              ),
                               Divider(
                                 height: 10,
                               ),
@@ -959,6 +1034,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           heapSort(_array);
         } else if (method == "COCKTAIL SORT") {
           cocktailSort(_array);
+        } else if (method == "GNOME SORT") {
+          gnomeSort(_array);
         }
       };
     }
@@ -1025,6 +1102,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             } else if (currentSortingMethod == "Cocktail Sort") {
               try {
                 sort("COCKTAIL SORT");
+              } catch (NoSuchMethodError) {}
+            } else if (currentSortingMethod == "Gnome Sort") {
+              try {
+                sort("GNOME SORT");
               } catch (NoSuchMethodError) {}
             }
           },
