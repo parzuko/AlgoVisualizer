@@ -25,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   Stream<List<int>> _stream;
   int color = 1;
   bool isSelected = true;
-  var highlightText = [false, true, false, false, false];
+  var highlightText = [false, true, false, false, false, false];
   var theThemes = [true, false, false, false, false];
   var highlightMode = [false, true, false];
 ////////////////////////////SORTING METHODS/////////////////////////
@@ -126,6 +126,47 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     int temp = list[0];
     list[0] = list[i];
     list[i] = temp;
+  }
+
+  void cocktailSwap(List list, int i) {
+    int temp = list[i];
+    list[i] = list[i + 1];
+    list[i + 1] = temp;
+  }
+
+  void cocktailSort(List list) async {
+    setState(() {
+      isSelected = false;
+    });
+    bool swapped = true;
+    do {
+      swapped = false;
+      for (int i = 0; i < list.length - 2; i++) {
+        await Future.delayed(Duration(microseconds: 500));
+        swapped = swapItemCocktail(list, i, swapped);
+        _streamController.add(_array);
+      }
+
+      if (swapped) {
+        swapped = false;
+        for (int i = list.length - 2; i >= 0; i--) {
+          await Future.delayed(Duration(microseconds: 500));
+          swapped = swapItemCocktail(list, i, swapped);
+          _streamController.add(_array);
+        }
+      }
+    } while (swapped);
+    setState(() {
+      isSelected = true;
+    });
+  }
+
+  bool swapItemCocktail(List list, int i, bool swapped) {
+    if (list[i] > list[i + 1]) {
+      cocktailSwap(list, i);
+      swapped = true;
+    }
+    return swapped;
   }
 
   // Partition Method For Quick Sort
@@ -782,6 +823,49 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                       highlightText[4] = !highlightText[4]);
                                 },
                               ),
+                              ListTile(
+                                leading: Icon(
+                                  Icons.local_bar,
+                                  color: Palette.scaffold,
+                                  size: 35,
+                                ),
+                                trailing: Text(
+                                  "Best Time Complexity O(n)²",
+                                  style: TextStyle(
+                                    color: highlightText[5]
+                                        ? Palette.scaffold
+                                        : Palette.textColor,
+                                    fontSize: 13.0,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 0.7,
+                                    fontFamily: 'Segoe UI',
+                                  ),
+                                ),
+                                title: Text(
+                                  "Cocktail Sort",
+                                  style: TextStyle(
+                                    color: highlightText[5]
+                                        ? Palette.theButton
+                                        : Palette.brightText,
+                                    fontSize: 15.0,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 0.7,
+                                    fontFamily: 'Segoe UI',
+                                  ),
+                                ),
+                                onTap: () {
+                                  selectSortingMethod("Cocktail Sort");
+                                  setState(() {
+                                    for (var each = 0;
+                                        each < highlightText.length;
+                                        each++) {
+                                      highlightText[each] = false;
+                                    }
+                                  });
+                                  setModalState(() =>
+                                      highlightText[5] = !highlightText[5]);
+                                },
+                              ),
                               Divider(
                                 height: 10,
                               ),
@@ -873,6 +957,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           insertion();
         } else if (method == "HEAP SORT") {
           heapSort(_array);
+        } else if (method == "COCKTAIL SORT") {
+          cocktailSort(_array);
         }
       };
     }
@@ -935,6 +1021,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             } else if (currentSortingMethod == "Heap Sort") {
               try {
                 sort("HEAP SORT");
+              } catch (NoSuchMethodError) {}
+            } else if (currentSortingMethod == "Cocktail Sort") {
+              try {
+                sort("COCKTAIL SORT");
               } catch (NoSuchMethodError) {}
             }
           },
