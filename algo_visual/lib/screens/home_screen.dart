@@ -1,7 +1,5 @@
 import 'dart:async';
 import 'dart:math';
-
-//import 'package:algo_visual/algos/selection.dart';
 import 'package:algo_visual/config/numbers.dart';
 import 'package:algo_visual/config/palette.dart';
 import 'package:algo_visual/config/toastie.dart';
@@ -15,7 +13,7 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
+class _HomeScreenState extends State<HomeScreen> {
 ////////////////////////////GLBOAL VARIABLES/////////////////////////
   List<int> _array = [];
   String currentSortingMethod = "Selection Sort";
@@ -29,6 +27,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   var highlightMode = [false, true, false];
 ////////////////////////////SORTING METHODS/////////////////////////
 
+  // Gnome Sort
   void gnomeSort(List list) async {
     setState(() {
       isSelected = false;
@@ -106,6 +105,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     });
   }
 
+  // For Heap Sort
   void heapify(List list, int n, int i) {
     int largest = i;
     int l = 2 * i + 1;
@@ -125,12 +125,14 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     }
   }
 
+  //  Swap For Heap
   void swapList(List list, int i, int largest) {
     int swap = list[i];
     list[i] = list[largest];
     list[largest] = swap;
   }
 
+  // Heap Sort
   void heapSort(List list) async {
     setState(() {
       isSelected = false;
@@ -159,12 +161,14 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     list[i] = temp;
   }
 
+  // Cocktail Sort - Swap
   void cocktailSwap(List list, int i) {
     int temp = list[i];
     list[i] = list[i + 1];
     list[i + 1] = temp;
   }
 
+  // Cocktail Sort
   void cocktailSort(List list) async {
     setState(() {
       isSelected = false;
@@ -279,6 +283,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   };
   int mode = 1;
 
+  // Bottom Sheet
   void showMenu() {
     showModalBottomSheet(
         context: context,
