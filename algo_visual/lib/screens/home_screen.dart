@@ -8,6 +8,7 @@ import 'package:algo_visual/config/toastie.dart';
 import 'package:algo_visual/screens/settings.dart';
 import 'package:animated_icon_button/animated_icon_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -1070,11 +1071,16 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             );
           }),
       floatingActionButton: Container(
-        height: screenWidth * 0.16,
-        width: screenWidth * 0.16,
+        height: screenWidth * 0.18,
+        width: screenWidth * 0.18,
+        // color: Palette.brightText,
+        decoration: BoxDecoration(
+          color: Palette.brightText,
+          borderRadius: BorderRadius.circular(100),
+        ),
         child: FloatingActionButton(
           child: Icon(
-            Icons.show_chart,
+            Feather.bar_chart,
             size: 45,
           ),
           backgroundColor: Palette.brightText,
