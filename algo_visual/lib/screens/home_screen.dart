@@ -542,8 +542,21 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         child: Container(
                           child: Column(
                             children: [
-                              SizedBox(
-                                height: 10,
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    width: 15,
+                                  ),
+                                  IconButton(
+                                      icon: Icon(
+                                        Icons.close,
+                                        size: 35,
+                                        color: Palette.scaffold,
+                                      ),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      }),
+                                ],
                               ),
                               Text(
                                 "Mode",
@@ -553,6 +566,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                     fontWeight: FontWeight.bold,
                                     letterSpacing: 1,
                                     fontFamily: 'Segoe UI'),
+                              ),
+                              SizedBox(
+                                height: 5,
                               ),
                               SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
