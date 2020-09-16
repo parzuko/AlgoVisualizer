@@ -17,8 +17,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 ////////////////////////////GLBOAL VARIABLES/////////////////////////
-  AnimationController _animationController;
-  bool play_pause = false;
   List<int> _array = [];
   String currentSortingMethod = "Selection Sort";
   double _sizeOfArray = 500;
@@ -280,247 +278,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     "Reverse": 3,
   };
   int mode = 1;
-  Column showBottomNavigationMenu() {
-    return Column(
-      children: [
-        Text(
-          "Mode",
-          style: TextStyle(
-              color: Palette.scaffold,
-              fontSize: 22.0,
-              fontWeight: FontWeight.bold,
-              letterSpacing: 1,
-              fontFamily: 'Segoe UI'),
-        ),
-        SizedBox(
-          height: 5,
-        ),
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              FlatButton(
-                onPressed: () {
-                  setState(() {
-                    setState(() {
-                      mode = modes["Frenzy"];
-                      for (var each = 0; each < highlightMode.length; each++) {
-                        highlightMode[each] = false;
-                      }
-                    });
-                    setState(() => highlightMode[0] = !highlightMode[0]);
-                  });
-                },
-                child: Text(
-                  "Frenzy Mode",
-                  style: TextStyle(
-                      color: highlightMode[0]
-                          ? Palette.theButton
-                          : Palette.scaffold,
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 1,
-                      fontFamily: 'Segoe UI'),
-                ),
-              ),
-              FlatButton(
-                onPressed: () {
-                  setState(() {
-                    mode = modes["Normal"];
-                    for (var each = 0; each < highlightMode.length; each++) {
-                      highlightMode[each] = false;
-                    }
-                  });
-                  setState(() => highlightMode[1] = !highlightMode[1]);
-                },
-                child: Text(
-                  "Standard",
-                  style: TextStyle(
-                      color: highlightMode[1]
-                          ? Palette.theButton
-                          : Palette.scaffold,
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 1,
-                      fontFamily: 'Segoe UI'),
-                ),
-              ),
-              FlatButton(
-                onPressed: () {
-                  setState(() {
-                    mode = modes["Reverse"];
-                    for (var each = 0; each < highlightMode.length; each++) {
-                      highlightMode[each] = false;
-                    }
-                  });
-                  setState(() => highlightMode[2] = !highlightMode[2]);
-                },
-                child: Text(
-                  "DownSideUp",
-                  style: TextStyle(
-                      color: highlightMode[2]
-                          ? Palette.theButton
-                          : Palette.scaffold,
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 1,
-                      fontFamily: 'Segoe UI'),
-                ),
-              ),
-            ],
-          ),
-        ),
-        Divider(
-          height: 20,
-        ),
-        ListTile(
-          leading: Icon(
-            Icons.bubble_chart,
-            color: Palette.scaffold,
-            size: 35,
-          ),
-          title: Text(
-            "Bubble Sort",
-            style: TextStyle(
-              color: highlightText[0] ? Palette.theButton : Palette.brightText,
-              fontSize: 15.0,
-              fontWeight: FontWeight.bold,
-              letterSpacing: 0.7,
-              fontFamily: 'Segoe UI',
-            ),
-          ),
-          trailing: Text(
-            "Best Time Complexity O(n)",
-            style: TextStyle(
-              color: highlightText[0] ? Palette.scaffold : Palette.textColor,
-              fontSize: 13.0,
-              fontWeight: FontWeight.bold,
-              letterSpacing: 0.7,
-              fontFamily: 'Segoe UI',
-            ),
-          ),
-          onTap: () {
-            selectSortingMethod("Bubble Sort");
-            setState(() {
-              for (var each = 0; each < highlightText.length; each++) {
-                highlightText[each] = false;
-              }
-            });
-            setState(() => highlightText[0] = !highlightText[0]);
-          },
-        ),
-        ListTile(
-          leading: Icon(
-            Icons.select_all,
-            color: Palette.scaffold,
-            size: 35,
-          ),
-          trailing: Text(
-            "Best Time Complexity O(n)²",
-            style: TextStyle(
-              color: highlightText[1] ? Palette.scaffold : Palette.textColor,
-              fontSize: 13.0,
-              fontWeight: FontWeight.bold,
-              letterSpacing: 0.7,
-              fontFamily: 'Segoe UI',
-            ),
-          ),
-          title: Text(
-            "Selection Sort",
-            style: TextStyle(
-              color: highlightText[1] ? Palette.theButton : Palette.brightText,
-              fontSize: 15.0,
-              fontWeight: FontWeight.bold,
-              letterSpacing: 0.7,
-              fontFamily: 'Segoe UI',
-            ),
-          ),
-          onTap: () {
-            selectSortingMethod("Selection Sort");
-            setState(() {
-              for (var each = 0; each < highlightText.length; each++) {
-                highlightText[each] = false;
-              }
-            });
-            setState(() => highlightText[1] = !highlightText[1]);
-          },
-        ),
-        ListTile(
-          leading: Icon(
-            Icons.directions_run,
-            color: Palette.scaffold,
-            size: 35,
-          ),
-          trailing: Text(
-            "Best Time Complexity O(nlogn)",
-            style: TextStyle(
-              color: highlightText[2] ? Palette.scaffold : Palette.textColor,
-              fontSize: 13.0,
-              fontWeight: FontWeight.bold,
-              letterSpacing: 0.7,
-              fontFamily: 'Segoe UI',
-            ),
-          ),
-          title: Text(
-            "Quick Sort",
-            style: TextStyle(
-              color: highlightText[2] ? Palette.theButton : Palette.brightText,
-              fontSize: 15.0,
-              fontWeight: FontWeight.bold,
-              letterSpacing: 0.7,
-              fontFamily: 'Segoe UI',
-            ),
-          ),
-          onTap: () {
-            selectSortingMethod("Quick Sort");
-            setState(() {
-              for (var each = 0; each < highlightText.length; each++) {
-                highlightText[each] = false;
-              }
-            });
-            setState(() => highlightText[2] = !highlightText[2]);
-          },
-        ),
-        ListTile(
-          leading: Icon(
-            Icons.settings_input_svideo,
-            color: Palette.scaffold,
-            size: 35,
-          ),
-          trailing: Text(
-            "Best Time Complexity O(n)",
-            style: TextStyle(
-              color: highlightText[3] ? Palette.scaffold : Palette.textColor,
-              fontSize: 13.0,
-              fontWeight: FontWeight.bold,
-              letterSpacing: 0.7,
-              fontFamily: 'Segoe UI',
-            ),
-          ),
-          title: Text(
-            "Insertion Sort",
-            style: TextStyle(
-              color: highlightText[3] ? Palette.theButton : Palette.brightText,
-              fontSize: 15.0,
-              fontWeight: FontWeight.bold,
-              letterSpacing: 0.7,
-              fontFamily: 'Segoe UI',
-            ),
-          ),
-          onTap: () {
-            selectSortingMethod("Insertion Sort");
-            setState(() {
-              for (var each = 0; each < highlightText.length; each++) {
-                highlightText[each] = false;
-              }
-            });
-            setState(() => highlightText[3] = !highlightText[3]);
-          },
-        ),
-      ],
-    );
-  }
 
   void showMenu() {
     showModalBottomSheet(
@@ -548,14 +305,15 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                     width: 15,
                                   ),
                                   IconButton(
-                                      icon: Icon(
-                                        Icons.close,
-                                        size: 35,
-                                        color: Palette.scaffold,
-                                      ),
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      }),
+                                    icon: Icon(
+                                      Icons.close,
+                                      size: 35,
+                                      color: Palette.scaffold,
+                                    ),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
                                 ],
                               ),
                               Text(
@@ -1023,14 +781,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _animationController = AnimationController(
-      vsync: this,
-      duration: Duration(milliseconds: 750),
-      reverseDuration: Duration(milliseconds: 750),
-    );
     _streamController = StreamController<List<int>>();
     _stream = _streamController.stream;
-
     _shuffle();
   }
 
@@ -1057,9 +809,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       };
     }
     final double screenWidth = MediaQuery.of(context).size.width;
-    final double screenHeight = MediaQuery.of(context).size.height;
-    final ratioHeight = 65 / screenHeight;
-    final containerHeight = 500 / screenHeight;
     return Scaffold(
       body: StreamBuilder<Object>(
           stream: _stream,
@@ -1204,146 +953,3 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     );
   }
 }
-
-/**
- * DraggableScrollableSheet(
-        initialChildSize: ratioHeight,
-        minChildSize: ratioHeight,
-        maxChildSize: containerHeight,
-        builder: (context, controller) {
-          return Container(
-            decoration: BoxDecoration(color: Palette.textColor),
-            child: ListView.builder(
-              itemCount: 1,
-              controller: controller,
-              itemBuilder: (BuildContext context, index) {
-                return Column(
-                  children: [
-                    BottomAppBar(
-                      color: Palette.theButton,
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            AnimatedIconButton(
-                              animationController: _animationController,
-                              size: 30,
-                              onPressed: () {
-                                showToast(
-                                  "Scroll Up For More Options.",
-                                  gravity: Toastie.bottom,
-                                  duration: Toastie.lengthLong,
-                                );
-                              },
-                              startIcon: Icon(
-                                Icons.menu,
-                                color: Palette.textColor,
-                              ),
-                              endIcon: Icon(
-                                Icons.arrow_forward,
-                                color: Palette.textColor,
-                              ),
-                            ),
-                            FlatButton(
-                              onPressed: () {
-                                if (currentSortingMethod == "Bubble Sort") {
-                                  try {
-                                    sort("BUBBLE SORT");
-                                  } catch (NoSuchMethodError) {}
-                                } else if (currentSortingMethod ==
-                                    "Selection Sort") {
-                                  try {
-                                    sort("SELECTION SORT");
-                                  } catch (NoSuchMethodError) {}
-                                } else if (currentSortingMethod ==
-                                    "Insertion Sort") {
-                                  try {
-                                    sort("INSERTION SORT");
-                                  } catch (NoSuchMethodError) {}
-                                } else {
-                                  try {
-                                    sort("QUICK SORT");
-                                  } catch (NoSuchMethodError) {}
-                                }
-                              },
-                              child: Text(
-                                currentSortingMethod,
-                                style: TextStyle(
-                                  color: Palette.textColor,
-                                  fontSize: 18.0,
-                                  fontWeight: FontWeight.bold,
-                                  letterSpacing: 1,
-                                  fontFamily: 'Segoe UI',
-                                ),
-                              ),
-                            ),
-                            SizedBox(width: screenWidth / 5),
-                            Row(
-                              children: [
-                                AnimatedIconButton(
-                                  duration: Duration(milliseconds: 500),
-                                  padding: EdgeInsets.fromLTRB(0.5, 0, 0, 0),
-                                  startIcon: Icon(
-                                    Icons.cached,
-                                    color: Palette.textColor,
-                                  ),
-                                  endIcon: Icon(
-                                    Icons.autorenew,
-                                    color: Palette.textColor,
-                                  ),
-                                  size: 30.0,
-                                  onPressed: () {
-                                    if (isSelected) {
-                                      _shuffle();
-                                    } else {
-                                      showToast(
-                                        "$currentSortingMethod In Process.",
-                                        gravity: Toastie.bottom,
-                                        duration: Toastie.lengthLong,
-                                      );
-                                    }
-                                  },
-                                ),
-                                IconButton(
-                                  icon: Icon(Icons.settings),
-                                  iconSize: 30.0,
-                                  color: Palette.textColor,
-                                  onPressed: () {
-                                    if (isSelected) {
-                                      showSettingsPage();
-                                    } else {
-                                      showToast(
-                                        "$currentSortingMethod In Process.",
-                                        gravity: Toastie.bottom,
-                                        duration: Toastie.lengthLong,
-                                      );
-                                    }
-                                  },
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Container(
-                      height: 400,
-                      color: Palette.scaffold,
-                      child: Container(
-                        child: showBottomNavigationMenu(),
-                        decoration: BoxDecoration(
-                          color: Palette.textColor,
-                        ),
-                      ),
-                    ),
-                  ],
-                );
-              },
-            ),
-          );
-        },
-      ),
- */
