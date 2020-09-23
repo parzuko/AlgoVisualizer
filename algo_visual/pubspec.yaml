@@ -1,5 +1,5 @@
 name: algo_visual
-description: A new Flutter project.
+description: AlgoViualizer picks up on where most sorting visualizers left off. Now Visualizer the top 8 most famous sorting algorithms in tech in 6 different colors and 3 unique themes. 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
