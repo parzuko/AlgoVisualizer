@@ -32,7 +32,6 @@ My submission to <a href="https://www.algoexpert.io/swe-project-contests/2020-su
   <img src="https://media.giphy.com/media/hk3zNCDNp0vVyCsZOY/giphy.gif" />
   <img src="https://media.giphy.com/media/VCRkKH081X7pB7Zpk3/giphy.gif" />
   <img src="https://media.giphy.com/media/goD34bIbMigMi5Dej3/giphy.gif" />
-  <img src="https://media.giphy.com/media/yy3RT37eZPG1ldszrg/giphy.gif" />
   
 </p>
 </details>
@@ -41,7 +40,7 @@ My submission to <a href="https://www.algoexpert.io/swe-project-contests/2020-su
 
 <p align="center">
   <img src="https://media.giphy.com/media/BYmHEmV61fjIHLF46S/giphy.gif" />
-  
+  <img src="https://media.giphy.com/media/hk3zNCDNp0vVyCsZOY/giphy.gif" />
   <img src="https://media.giphy.com/media/Dka5UNIuBPsJuRssTq/giphy.gif" />
   
 </p> 
