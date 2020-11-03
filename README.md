@@ -5,7 +5,7 @@
 # :bulb: The Idea Behind The App 
 
 <h4 align="center">
-My submission to <a href="https://www.algoexpert.io/swe-project-contests/2020-summer">Algo-Expert’s SWE Visualizaton Project contest</a>. AlgoViualizer picks up on where most sorting visualizers left off. Now visualize the 7 most famous sorting algorithms in tech, in  5 different colors and 3 awesome modes. Made purely in Flutter. Watch the video <a href = "https://www.youtube.com/watch?v=Ix_KsaIT0x0&ab_channel=JivanshSharma">here</a>
+AlgoViualizer picks up on where most sorting visualizers left off. Now visualize the 7 most famous sorting algorithms in tech, in  5 different colors and 3 awesome modes. Made purely in Flutter. Watch the video <a href = "https://www.youtube.com/watch?v=Ix_KsaIT0x0&ab_channel=JivanshSharma">here</a>
 </h4>
 
 ## :eyes: Screens
